@@ -3,6 +3,7 @@ import {AbsoluteFill, Img, useVideoConfig} from 'remotion';
 import {RoleTitle, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
 import {DoodleBench, DoodleBulb, DoodleTrafficLight, DoodleHospital, DoodleRoad, DoodleSchool, DoodleBridge} from './doodles';
+import {ChapterBadge} from '../visual/ChapterBadge';
 import {beatAt} from './util';
 
 // EL GOBERNADOR (3:22–4:50) — molde: personaje transitorio, texto libre, un visual
@@ -98,7 +99,7 @@ export const GobernadorScene: React.FC<{durationInFrames: number; fromSec: numbe
       <FlowItem inAt={tPuentes + 4} outAt={tPuente - 10} enter="up" exit="fade" style={{left: 1470, top: 610}}>
         <FreeText text="puentes" color="ink" fontSize={40} rotate={2} />
       </FlowItem>
-      <FlowItem inAt={tMonumental} outAt={tPuente - 8} enter="up" style={{left: 520, top: 820}}>
+      <FlowItem inAt={tMonumental} outAt={tPuente - 8} enter="up" style={{left: 520, top: 790}}>
         <FreeText text="…todo «monumental» y difícil de fiscalizar" color="red" fontSize={46} rotate={-2} />
       </FlowItem>
 
@@ -131,6 +132,7 @@ export const GobernadorScene: React.FC<{durationInFrames: number; fromSec: numbe
       <FlowItem inAt={tPiedra + 30} enter="right" style={{left: 1180, top: 760}}>
         <FreeText text="…pero sin segunda" color="red" fontSize={48} rotate={3} />
       </FlowItem>
+      <ChapterBadge outfit="governor" label="EL GOBERNADOR" at={10} />
     </AbsoluteFill>
   );
 };

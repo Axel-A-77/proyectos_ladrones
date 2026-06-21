@@ -23,22 +23,26 @@ export const Subtitles: React.FC = () => {
 
   return (
     <AbsoluteFill
-      style={{justifyContent: 'flex-end', alignItems: 'center', padding: '0 8% 64px'}}
+      style={{justifyContent: 'flex-end', alignItems: 'center', padding: '0 11% 58px', pointerEvents: 'none'}}
     >
       <div
         style={{
-          maxWidth: '86%',
-          backgroundColor: 'rgba(21,18,13,0.82)',
-          color: COLORS.cream,
+          maxWidth: '78%',
+          backgroundColor: 'rgba(21,18,13,0.84)',
+          color: COLORS.white,
           fontFamily: FONTS.body,
           fontWeight: 800,
           fontSize: 46,
-          lineHeight: 1.25,
+          lineHeight: 1.22,
           textAlign: 'center',
-          padding: '12px 26px',
+          padding: '12px 28px',
           borderRadius: 18,
           opacity: appear,
-          boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.28)',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
         }}
       >
         {cap.text}

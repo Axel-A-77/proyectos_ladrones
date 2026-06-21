@@ -3,6 +3,7 @@ import {AbsoluteFill, Img, useVideoConfig} from 'remotion';
 import {COLORS} from '../theme';
 import {RoleTitle, Sparkles, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
+import {ChapterBadge} from '../visual/ChapterBadge';
 import {beatAt} from './util';
 
 // Doodle "vereda con huecos" (código) — el visual de la "oportunidad".
@@ -89,6 +90,7 @@ export const AlcaldeScene: React.FC<{durationInFrames: number; fromSec: number}>
       <FlowItem inAt={tPlaya} enter="fade" style={{left: 0, top: 0, width: 1920, height: 1080}}>
         <Sparkles points={[{x: 540, y: 240}, {x: 1360, y: 250, delay: 8}, {x: 1160, y: 700, delay: 14}]} />
       </FlowItem>
+      <ChapterBadge outfit="mayor" label="EL ALCALDE" at={10} />
     </AbsoluteFill>
   );
 };

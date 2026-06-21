@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Img, useVideoConfig} from 'remotion';
 import {RoleTitle, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
+import {ChapterBadge} from '../visual/ChapterBadge';
 import {beatAt} from './util';
 
 // EL PRESIDENTE (7:22–8:51) — molde: personaje transitorio, texto libre, un visual
@@ -95,6 +96,7 @@ export const PresidenteScene: React.FC<{durationInFrames: number; fromSec: numbe
       <FlowItem inAt={tPatria} enter="down" style={{left: 720, top: 760}}>
         <FreeText text="…salvando la patria entre donas y café" color="red" fontSize={48} rotate={-2} />
       </FlowItem>
+      <ChapterBadge outfit="president" label="EL PRESIDENTE" at={10} />
     </AbsoluteFill>
   );
 };

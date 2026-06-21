@@ -52,26 +52,26 @@ export const S03: React.FC<P> = ({fromSec}) => {
         <DoodleKey height={90} />
       </FlowItem>
 
-      {/* la casa: ancla (se queda con flote sutil) */}
-      <FlowItem inAt={tCasa} enter="scale" style={{left: 690, top: 300}}>
+      {/* la casa: BASE desde frame 0 (ancla con flote sutil) */}
+      <FlowItem inAt={4} enter="scale" style={{left: 690, top: 300}}>
         <Idle amp={5} speed={30}>
           <DoodleHouse height={460} />
         </Idle>
       </FlowItem>
 
-      {/* ventana SE VENDE (entra y sale) */}
-      <FlowItem inAt={tVent} outAt={tSala + 28} enter="left" exit="left" style={{left: 230, top: 380}}>
+      {/* ventana SE VENDE — SE QUEDA (acumula) */}
+      <FlowItem inAt={tVent} enter="left" style={{left: 230, top: 380}}>
         <DoodleWindow height={200} />
       </FlowItem>
-      <FlowItem inAt={tVent + 4} outAt={tSala + 28} enter="left" exit="fade" style={{left: 215, top: 330}}>
+      <FlowItem inAt={tVent + 4} enter="left" style={{left: 215, top: 330}}>
         <FreeText text="SE VENDE" color="red" fontSize={46} rotate={-4} font="display" />
       </FlowItem>
 
-      {/* sofá EN ALQUILER (entra y sale) */}
-      <FlowItem inAt={tSala} outAt={tPeaje + 30} enter="left" exit="left" style={{left: 250, top: 660}}>
+      {/* sofá EN ALQUILER — SE QUEDA (acumula) */}
+      <FlowItem inAt={tSala} enter="left" style={{left: 250, top: 660}}>
         <DoodleSofa height={170} />
       </FlowItem>
-      <FlowItem inAt={tSala + 4} outAt={tPeaje + 30} enter="left" exit="fade" style={{left: 240, top: 610}}>
+      <FlowItem inAt={tSala + 4} enter="left" style={{left: 240, top: 610}}>
         <FreeText text="EN ALQUILER" color="ink" fontSize={44} rotate={3} font="display" />
       </FlowItem>
 

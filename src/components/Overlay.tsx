@@ -2,7 +2,14 @@ import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {COLORS} from '../theme';
 
-export type Tone = 'cream' | 'dark';
+export type Tone = 'sun' | 'cream' | 'dark';
+
+// Fondo por tono. SIN negros (decisión del usuario): 'dark' cae a crema.
+const TONE_BG: Record<Tone, string> = {
+  sun: COLORS.sun, // amarillo cálido — comedia
+  cream: COLORS.cream, // crema — descansos / momentos serios
+  dark: COLORS.cream,
+};
 
 // Envoltorio de cada corte a animación: fondo según el tono y fundidos cortos
 // de entrada/salida (transición suave, no corte seco). Cubre toda la pantalla.
@@ -12,7 +19,7 @@ export const Overlay: React.FC<{
   fadeIn?: number;
   fadeOut?: number;
   children: React.ReactNode;
-}> = ({tone = 'cream', durationInFrames, fadeIn = 10, fadeOut = 10, children}) => {
+}> = ({tone = 'sun', durationInFrames, fadeIn = 10, fadeOut = 10, children}) => {
   const frame = useCurrentFrame();
   // fadeIn/fadeOut = 0 => sin fundido (el título arranca opaco; entre animaciones
   // contiguas la saliente no se desvanece, la entrante la cubre solapada).
@@ -31,8 +38,14 @@ export const Overlay: React.FC<{
           extrapolateRight: 'clamp',
         });
   const opacity = Math.min(opIn, opOut);
-  // Por ahora TODAS las escenas en crema (sin fondos negros).
-  const backgroundColor = COLORS.cream;
+  const bg = TONE_BG[tone] ?? COLORS.sun;
 
-  return <AbsoluteFill style={{backgroundColor, opacity}}>{children}</AbsoluteFill>;
+  // Fondo plano del tono + degradado cálido muy sutil (centro un pelín más claro).
+  return (
+    <AbsoluteFill style={{opacity}}>
+      <AbsoluteFill style={{backgroundColor: bg}} />
+      <AbsoluteFill style={{background: `radial-gradient(ellipse at 50% 40%, ${COLORS.paper}66 0%, transparent 70%)`}} />
+      {children}
+    </AbsoluteFill>
+  );
 };

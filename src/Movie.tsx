@@ -4,6 +4,7 @@ import {COLORS} from './theme';
 import {FONTS} from './fonts';
 import {PapaBase} from './components/PapaBase';
 import {Overlay} from './components/Overlay';
+import {Subtitles} from './components/Subtitles';
 import {SCENES} from './scenes/all';
 import {Segment} from './segments';
 import {ReducedMotionProvider} from './lib/reducedMotion';
@@ -56,6 +57,9 @@ export const Movie: React.FC<{segments: Segment[]; reducedMotion?: boolean}> = (
             </Sequence>
           );
         })}
+
+        {/* Subtítulos: última capa, encima de papá y de todas las animaciones. */}
+        <Subtitles />
       </AbsoluteFill>
     </ReducedMotionProvider>
   );

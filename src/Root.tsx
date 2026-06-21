@@ -2,6 +2,7 @@ import React from 'react';
 import {Composition} from 'remotion';
 import {LosLadrones} from './LosLadrones';
 import {LosLadronesDemo} from './LosLadronesDemo';
+import {QAPeople} from './scenes/QAPeople';
 import {FPS, WIDTH, HEIGHT} from './theme';
 import {CAPTIONS} from './lib/captions';
 
@@ -22,6 +23,9 @@ export const RemotionRoot: React.FC = () => {
         height={HEIGHT}
         defaultProps={{reducedMotion: false}}
       />
+
+      {/* QA: galería de personajes SVG (no entra al video) */}
+      <Composition id="QAPeople" component={QAPeople} durationInFrames={30} fps={FPS} width={WIDTH} height={HEIGHT} />
 
       {/* DEMO de 30s para validar el modelo de cortes */}
       <Composition

@@ -46,7 +46,7 @@ export const S19: React.FC<P> = ({fromSec}) => {
       <FlowItem inAt={tExperiencia} outAt={tCochera - 2} enter="left" exit="fade" style={{left: 540, top: 110}}>
         <FreeText text="…con «experiencia» justo en lo que se necesita" color="ink" fontSize={46} rotate={-2} />
       </FlowItem>
-      <FlowItem inAt={tCochera} enter="up" style={{left: 600, top: 800}}>
+      <FlowItem inAt={tCochera} enter="up" style={{left: 600, top: 790}}>
         <FreeText text="…creadas el martes, en una cochera con wifi" color="red" fontSize={46} rotate={2} />
       </FlowItem>
     </AbsoluteFill>
@@ -97,7 +97,7 @@ export const S20: React.FC<P> = ({fromSec}) => {
       <FlowItem inAt={tPiedra + 6} outAt={tCartel - 2} enter="down" exit="fade" style={{left: 560, top: 110}}>
         <FreeText text="mañana inauguran… una PIEDRA" color="ink" fontSize={52} rotate={-2} />
       </FlowItem>
-      <FlowItem inAt={tCartel} enter="scale" style={{left: 640, top: 800}}>
+      <FlowItem inAt={tCartel} enter="scale" style={{left: 640, top: 790}}>
         <FreeText text="«Gestión que cumple»" color="gold" fontSize={58} rotate={-2} font="display" />
       </FlowItem>
     </AbsoluteFill>

@@ -3,6 +3,7 @@ import {AbsoluteFill, Img, useVideoConfig} from 'remotion';
 import {RoleTitle, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
 import {DoodleStamp, DoodleScroll, DoodleClock, DoodleMoneyBag} from './doodles';
+import {ChapterBadge} from '../visual/ChapterBadge';
 import {beatAt} from './util';
 
 // EL CONGRESISTA (5:59–7:12) — molde: personaje transitorio, un visual por concepto
@@ -55,30 +56,31 @@ export const CongresistaScene: React.FC<{durationInFrames: number; fromSec: numb
       <FlowItem inAt={tLey} outAt={tDebate - 6} enter="scale" exit="up" style={{left: 1280, top: 430}}>
         <DoodleScroll height={200} />
       </FlowItem>
-      <FlowItem inAt={tSello + 6} outAt={tDebate - 6} enter="right" exit="fade" style={{left: 640, top: 330}}>
-        <FreeText text="…roba con reglamento, sello, ley" color="red" fontSize={46} rotate={2} />
+      <FlowItem inAt={tSello + 6} outAt={tDebate - 6} enter="right" exit="fade" style={{left: 760, top: 320}}>
+        <FreeText text="…roba con reglamento, sello, ley" color="red" fontSize={44} rotate={2} />
       </FlowItem>
 
-      {/* duerme en el debate (PNG) */}
+      {/* duerme en el debate (PNG) — textos a la IZQUIERDA, no encima del personaje */}
       <Hero src="14_congresista_dormido.png" at={tDebate} out={tMueble - 8} />
-      <FlowItem inAt={tDebate + 6} outAt={tVotar - 2} enter="down" exit="fade" style={{left: 560, top: 110}}>
-        <FreeText text="duerme en el debate…" color="ink" fontSize={52} rotate={-2} />
+      <FlowItem inAt={tDebate + 6} outAt={tVotar - 2} enter="left" exit="fade" style={{left: 70, top: 330}}>
+        <FreeText text="duerme en el debate…" color="ink" fontSize={48} rotate={-2} />
       </FlowItem>
-      <FlowItem inAt={tVotar} outAt={tReloj - 2} enter="left" exit="fade" style={{left: 540, top: 110}}>
-        <FreeText text="…despierta justo para votar" color="ink" fontSize={50} rotate={-2} />
-      </FlowItem>
-
-      {/* puntual como reloj suizo */}
-      <FlowItem inAt={tReloj} outAt={tMueble - 8} enter="scale" exit="up" style={{left: 1300, top: 600}}>
-        <DoodleClock height={180} />
-      </FlowItem>
-      <FlowItem inAt={tReloj + 2} outAt={tMueble - 8} enter="right" exit="fade" style={{left: 560, top: 110}}>
-        <FreeText text="…pero cobra puntual como reloj suizo" color="red" fontSize={46} rotate={-2} />
+      <FlowItem inAt={tVotar} outAt={tReloj - 2} enter="left" exit="fade" style={{left: 70, top: 330}}>
+        <FreeText text="…despierta para votar" color="ink" fontSize={48} rotate={-2} />
       </FlowItem>
 
-      {/* «defendiendo la democracia» — bocadillo apuntando al congresista dormido */}
-      <FlowItem inAt={tDefendiendo} outAt={tMueble - 8} enter="scale" exit="fade" style={{left: 660, top: 560}}>
-        <BubbleBox text={<>«…defendiendo<br />la democracia»</>} tailX={48} />
+      {/* puntual como reloj suizo (reloj a la derecha, texto a la izquierda) */}
+      <FlowItem inAt={tReloj} outAt={tMueble - 8} enter="scale" exit="up" style={{left: 1430, top: 520}}>
+        <DoodleClock height={200} />
+      </FlowItem>
+      <FlowItem inAt={tReloj + 2} outAt={tDefendiendo - 2} enter="left" exit="fade" style={{left: 70, top: 330}}>
+        <FreeText text="puntual como reloj suizo" color="red" fontSize={46} rotate={-2} />
+      </FlowItem>
+
+      {/* «defendiendo la democracia» — bocadillo ARRIBA apuntando al congresista,
+          presente toda la sección (la ironía: duerme pero "defiende la democracia") */}
+      <FlowItem inAt={tDebate + 14} outAt={tMueble - 6} enter="down" exit="fade" style={{left: 700, top: 40}}>
+        <BubbleBox text={<>«…defendiendo la democracia»</>} tailX={70} />
       </FlowItem>
 
       {/* mueble de lujo con SOBREPRECIO (PNG) */}
@@ -111,9 +113,10 @@ export const CongresistaScene: React.FC<{durationInFrames: number; fromSec: numb
       <FlowItem inAt={tGasolina} enter="right" style={{left: 1300, top: 640}}>
         <FreeText text="+ la gasolina" color="green" fontSize={52} rotate={-3} font="display" />
       </FlowItem>
-      <FlowItem inAt={tDignidad} enter="down" style={{left: 620, top: 820}}>
+      <FlowItem inAt={tDignidad} enter="down" style={{left: 620, top: 790}}>
         <FreeText text="…hasta viáticos a la dignidad" color="red" fontSize={50} rotate={-2} />
       </FlowItem>
+      <ChapterBadge outfit="congress" label="EL CONGRESISTA" at={10} />
     </AbsoluteFill>
   );
 };

@@ -51,7 +51,7 @@ export const MagiaScene: React.FC<{durationInFrames: number; fromSec: number}> =
           <FlowItem inAt={f(kw, sec)} outAt={tIlusion - 6} enter="down" exit="up" style={{left: x, top: 600}}>
             <Icon height={150} />
           </FlowItem>
-          <FlowItem inAt={f(kw, sec) + 4} outAt={tIlusion - 6} enter="up" exit="fade" style={{left: x - 6, top: 820}}>
+          <FlowItem inAt={f(kw, sec) + 4} outAt={tIlusion - 6} enter="up" exit="fade" style={{left: x - 6, top: 780}}>
             <FreeText text={t} color={i === 3 ? 'red' : 'ink'} fontSize={42} rotate={i % 2 ? 2 : -2} font="display" />
           </FlowItem>
         </React.Fragment>

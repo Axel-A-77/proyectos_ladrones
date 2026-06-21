@@ -595,3 +595,52 @@ export const DoodleBuilding: React.FC<D> = ({height = 200, style}) =>
     </g>,
     style
   );
+
+// Lupa (auditor que revisa).
+export const DoodleMagnifier: React.FC<D> = ({height = 170, style}) =>
+  box(
+    height,
+    170 / 170,
+    '0 0 170 170',
+    <g strokeLinejoin="round" strokeLinecap="round">
+      <path d="M104 104 L152 152" stroke={INK} strokeWidth={18} />
+      <circle cx={68} cy={68} r={50} fill="#bfe9fb" stroke={INK} strokeWidth={9} />
+      <circle cx={68} cy={68} r={50} fill="none" stroke="#fff" strokeWidth={3} opacity={0.6} />
+      <path d="M48 52 q14 -12 30 -2" fill="none" stroke="#fff" strokeWidth={6} opacity={0.7} />
+    </g>,
+    style
+  );
+
+// Factura / recibo (jagged abajo + líneas).
+export const DoodleReceipt: React.FC<D> = ({height = 180, style}) =>
+  box(
+    height,
+    130 / 180,
+    '0 0 130 180',
+    <g strokeLinejoin="round" strokeLinecap="round">
+      <path d="M22 16 L108 16 L108 150 L96 142 L84 152 L72 142 L60 152 L48 142 L36 152 L22 142 Z" fill={CREAM} stroke={INK} strokeWidth={7} />
+      {[44, 64, 84].map((y) => (
+        <path key={y} d={`M36 ${y} H94`} stroke="#9a917f" strokeWidth={6} />
+      ))}
+      <path d="M36 104 H78" stroke={RED} strokeWidth={7} />
+    </g>,
+    style
+  );
+
+// Calculadora.
+export const DoodleCalculator: React.FC<D> = ({height = 180, style}) =>
+  box(
+    height,
+    130 / 180,
+    '0 0 130 180',
+    <g strokeLinejoin="round" strokeLinecap="round">
+      <rect x={20} y={16} width={90} height={148} rx={10} fill="#3a3f4a" stroke={INK} strokeWidth={7} />
+      <rect x={32} y={28} width={66} height={30} rx={4} fill="#9DCD67" stroke={INK} strokeWidth={4} />
+      {[72, 100, 128].map((y) =>
+        [38, 58, 78].map((x) => (
+          <rect key={`${x}-${y}`} x={x} y={y} width={14} height={14} rx={3} fill={CREAM} stroke={INK} strokeWidth={3} />
+        ))
+      )}
+    </g>,
+    style
+  );
