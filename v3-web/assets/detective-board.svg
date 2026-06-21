@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 900">
+  <defs>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="8" dy="10" stdDeviation="6" flood-opacity=".22"/></filter>
+  </defs>
+  <rect width="1800" height="900" fill="#b98a55"/>
+  <rect x="45" y="45" width="1710" height="810" rx="28" fill="#ead8b9" stroke="#17130f" stroke-width="14"/>
+  <g stroke="#e84a3c" stroke-width="10" fill="none" stroke-linecap="round">
+    <path d="M330 260 C520 190 650 185 790 225"/>
+    <path d="M330 260 C500 420 610 590 780 650"/>
+    <path d="M1015 215 C1180 200 1320 220 1450 275"/>
+    <path d="M1010 650 C1180 615 1320 600 1450 610"/>
+    <path d="M900 330 C880 450 885 535 900 585" stroke="#7454c8"/>
+  </g>
+  <g fill="#e84a3c" stroke="#17130f" stroke-width="7">
+    <circle cx="330" cy="260" r="18"/><circle cx="790" cy="225" r="18"/><circle cx="780" cy="650" r="18"/>
+    <circle cx="1015" cy="215" r="18"/><circle cx="1450" cy="275" r="18"/><circle cx="1010" cy="650" r="18"/><circle cx="1450" cy="610" r="18"/>
+  </g>
+  <g filter="url(#sh)" font-family="Arial" font-weight="900">
+    <g transform="translate(90 95)">
+      <rect width="470" height="300" rx="24" fill="#fffdf7" stroke="#17130f" stroke-width="9"/>
+      <rect width="470" height="58" rx="24" fill="#79b84a"/>
+      <text x="235" y="41" text-anchor="middle" font-size="34" fill="#17130f">LA PATRIA</text>
+      <path d="M92 192 L180 102 L298 126 L350 208 L250 250 L130 232 Z" fill="#79b84a" stroke="#17130f" stroke-width="10"/>
+      <path d="M358 92 q48 28 58 78" fill="none" stroke="#17130f" stroke-width="8"/>
+      <text x="235" y="280" text-anchor="middle" font-size="28" fill="#17130f">DEBERÍA SER CUIDADA</text>
+    </g>
+    <g transform="translate(650 70)">
+      <rect width="500" height="325" rx="24" fill="#fffdf7" stroke="#17130f" stroke-width="9"/>
+      <rect width="500" height="58" rx="24" fill="#59a9d8"/>
+      <text x="250" y="41" text-anchor="middle" font-size="34" fill="#17130f">LA SOCIEDAD</text>
+      <circle cx="250" cy="166" r="72" fill="#fff" stroke="#17130f" stroke-width="10"/>
+      <circle cx="222" cy="155" r="9" fill="#17130f"/><circle cx="278" cy="155" r="9" fill="#17130f"/>
+      <path d="M210 196 Q250 222 292 194" fill="none" stroke="#17130f" stroke-width="8" stroke-linecap="round"/>
+      <path d="M170 282 Q250 205 330 282" fill="#59a9d8" stroke="#17130f" stroke-width="10"/>
+      <text x="250" y="310" text-anchor="middle" font-size="28" fill="#17130f">MIRA CON CONCIENCIA</text>
+    </g>
+    <g transform="translate(1235 95)">
+      <rect width="470" height="320" rx="24" fill="#fffdf7" stroke="#17130f" stroke-width="9"/>
+      <rect width="470" height="58" rx="24" fill="#e84a3c"/>
+      <text x="235" y="41" text-anchor="middle" font-size="34" fill="#17130f">EL LADRÓN</text>
+      <circle cx="235" cy="143" r="68" fill="#fff" stroke="#17130f" stroke-width="10"/>
+      <path d="M178 126 Q215 94 240 117 M247 111 Q284 86 306 120" fill="none" stroke="#17130f" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="212" cy="143" r="9" fill="#17130f"/><circle cx="267" cy="141" r="9" fill="#17130f"/>
+      <path d="M195 176 Q238 211 285 169" fill="none" stroke="#17130f" stroke-width="8" stroke-linecap="round"/>
+      <path d="M155 282 Q235 192 315 282" fill="#313944" stroke="#17130f" stroke-width="10"/>
+      <path d="M221 217 L239 254 L257 217" fill="#e84a3c" stroke="#17130f" stroke-width="6"/>
+      <rect x="192" y="240" width="90" height="45" rx="7" fill="#9ccd55" stroke="#17130f" stroke-width="6"/>
+      <text x="237" y="273" text-anchor="middle" font-size="31">$</text>
+      <text x="235" y="308" text-anchor="middle" font-size="28">ROBA CON CORBATA</text>
+    </g>
+    <g transform="translate(595 495)">
+      <rect width="530" height="300" rx="24" fill="#fffdf7" stroke="#17130f" stroke-width="9"/>
+      <rect width="530" height="58" rx="24" fill="#f2b84b"/>
+      <text x="265" y="41" text-anchor="middle" font-size="34">DINERO PÚBLICO</text>
+      <rect x="120" y="105" width="290" height="140" rx="26" fill="#72482d" stroke="#17130f" stroke-width="11"/>
+      <rect x="210" y="73" width="110" height="55" rx="12" fill="none" stroke="#17130f" stroke-width="9"/>
+      <text x="265" y="200" text-anchor="middle" font-size="90" fill="#f2b84b">$</text>
+      <text x="265" y="280" text-anchor="middle" font-size="28">NO ES BILLETERA PERSONAL</text>
+    </g>
+    <g transform="translate(1215 500)">
+      <rect width="500" height="300" rx="24" fill="#fffdf7" stroke="#17130f" stroke-width="9"/>
+      <rect width="500" height="58" rx="24" fill="#7454c8"/>
+      <text x="250" y="41" text-anchor="middle" font-size="34">LA COSTUMBRE</text>
+      <g transform="translate(95 105) rotate(-4)">
+        <rect width="310" height="115" rx="20" fill="#fff8e8" stroke="#e84a3c" stroke-width="10"/>
+        <text x="155" y="76" text-anchor="middle" font-size="58" fill="#e84a3c">NORMAL</text>
+      </g>
+      <text x="250" y="270" text-anchor="middle" font-size="28">HACE INVISIBLE EL ABUSO</text>
+    </g>
+    <g transform="translate(545 370) rotate(-3)">
+      <rect width="710" height="130" rx="22" fill="#fff8e8" stroke="#e84a3c" stroke-width="11"/>
+      <text x="355" y="85" text-anchor="middle" font-size="52" fill="#e84a3c">EL VERDADERO PELIGRO</text>
+    </g>
+  </g>
+</svg>
