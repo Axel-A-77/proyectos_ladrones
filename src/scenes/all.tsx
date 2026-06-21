@@ -5,7 +5,7 @@ import {EufemismosScene} from './EufemismosScene';
 import {AlcaldeScene} from './AlcaldeScene';
 import {GobernadorInfographic} from './GobernadorInfographic';
 import {CongresistaScene} from './CongresistaScene';
-import {PresidenteScene} from './PresidenteScene';
+import {PresidenteInfographic} from './PresidenteInfographic';
 import {MagiaInfographic} from './MagiaInfographic';
 import {PuebloAuditorScene} from './PuebloAuditorScene';
 import {S19, S20} from './Act2';
@@ -34,7 +34,7 @@ export const SCENES: Record<string, React.FC<SceneProps>> = {
   gobernador: GobernadorInfographic,
   '13_magia_negra': MagiaInfographic,
   congresista: CongresistaScene,
-  presidente: PresidenteScene,
+  presidente: PresidenteInfographic,
   '18_eufemismos': EufemismosScene,
   '19_empresa_champinon': S19,
   '20_inauguracion_piedra': S20,
