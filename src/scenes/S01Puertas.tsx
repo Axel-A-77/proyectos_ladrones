@@ -42,9 +42,9 @@ export const S01Puertas: React.FC<{durationInFrames: number; fromSec: number}> =
   const tSillon = W('sillón', 20.8);
   const tBillet = W('billetera', 24.3);
 
-  // PUERTA: baja y entra en "puertas"; se va hacia arriba cuando llega "sillón".
-  const doorOp = interpolate(frame, [tPuerta, tPuerta + 8, tSillon - 6, tSillon + 6], [0, 1, 1, 0], clamp);
-  const doorY = interpolate(frame, [tPuerta, tPuerta + 12, tSillon - 6, tSillon + 8], [-240, 0, 0, -300], clamp);
+  // PUERTA: BASE desde frame 0 (la "puerta del poder"); se va hacia arriba en "sillón".
+  const doorOp = interpolate(frame, [0, 10, tSillon - 6, tSillon + 6], [0, 1, 1, 0], clamp);
+  const doorY = interpolate(frame, [0, 14, tSillon - 6, tSillon + 8], [-220, 0, 0, -300], clamp);
 
   // FIGURA: camina desde la izquierda (en "puertas") y se sienta (en "sillón"). Siempre presente.
   const figX = interpolate(frame, [tPuerta, tPuerta + 26, tSillon, tSillon + 16], [-360, 470, 470, 560], clamp);
@@ -67,7 +67,7 @@ export const S01Puertas: React.FC<{durationInFrames: number; fromSec: number}> =
     <AbsoluteFill>
       {/* suelo (se dibuja una vez, queda de base) */}
       <svg width={1920} height={120} viewBox="0 0 1920 120" style={{position: 'absolute', left: 0, top: 820}}>
-        <DrawPath d="M120 60 C 700 30, 1300 30, 1800 60" delay={tPuerta} duration={24} stroke={COLORS.ink} strokeWidth={6} />
+        <DrawPath d="M120 60 C 700 30, 1300 30, 1800 60" delay={6} duration={24} stroke={COLORS.ink} strokeWidth={6} />
       </svg>
 
       {/* TRONO (detrás de la figura) */}

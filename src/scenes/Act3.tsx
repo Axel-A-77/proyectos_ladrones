@@ -4,7 +4,7 @@ import {COLORS} from '../theme';
 import {RoleTitle, PhraseSwap, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
 import {PersonBase, Outfit, Diogenes} from '../visual/People';
-import {DoodleHospital, DoodleCar, DoodleWallet, DoodleCountry, DoodleDetector, DoodleTv, DoodleRemote, DoodleEnvelope} from './doodles';
+import {DoodleHospital, DoodleCar, DoodleWallet, DoodleCountry, DoodleDetector, DoodleTv, DoodleRemote, DoodleEnvelope, DoodleSpreadsheet, DoodleBuilding} from './doodles';
 import {beatAt} from './util';
 
 type P = {durationInFrames: number; fromSec: number};
@@ -147,13 +147,30 @@ export const S24: React.FC<P> = ({fromSec}) => {
   const tMansion = f('mansión', 717);
   return (
     <AbsoluteFill>
-      {/* BASE desde frame 0: el panel antes/después */}
-      <Hero src="24_antes_despues_mansion.png" at={0} h={650} />
-      <FlowItem inAt={f('hambre', 708)} enter="left" style={{left: 130, top: 180}}>
-        <FreeText text="ANTES: muerto de hambre" color="ink" fontSize={46} rotate={-3} font="display" />
+      {/* divisoria antes | después */}
+      <div style={{position: 'absolute', left: 957, top: 150, width: 4, height: 620, background: COLORS.muted}} />
+      {/* IZQUIERDA (antes): flaco, muerto de hambre */}
+      <FlowItem inAt={0} enter="left" style={{left: 300, top: 300}}>
+        <Idle amp={4} speed={30}>
+          <PersonBase outfit="citizen" expression="sad" build="thin" height={430} />
+        </Idle>
       </FlowItem>
-      <FlowItem inAt={f('rolex', 712.5)} enter="right" style={{left: 1230, top: 180}}>
-        <FreeText text="DESPUÉS: Rolex y mansión" color="red" fontSize={46} rotate={3} font="display" />
+      {/* DERECHA (después): gordo, mansión */}
+      <FlowItem inAt={0} enter="right" style={{left: 1380, top: 320}}>
+        <Idle amp={3} speed={26}>
+          <DoodleBuilding height={420} />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={4} enter="right" style={{left: 1080, top: 290}}>
+        <Idle amp={4} speed={24}>
+          <PersonBase outfit="suit" expression="greedy" build="fat" height={450} />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={f('hambre', 708)} enter="left" style={{left: 150, top: 180}}>
+        <FreeText text="ANTES: muerto de hambre" color="ink" fontSize={44} rotate={-3} font="display" />
+      </FlowItem>
+      <FlowItem inAt={f('rolex', 712.5)} enter="right" style={{left: 1150, top: 180}}>
+        <FreeText text="DESPUÉS: Rolex y mansión" color="red" fontSize={44} rotate={3} font="display" />
       </FlowItem>
       <FlowItem inAt={f('esfuerzo', 725)} enter="up" style={{left: 560, top: 790}}>
         <FreeText text="«¿cómo lo logré? con mucho esfuerzo»" color="ink" fontSize={48} rotate={-2} />
@@ -253,8 +270,18 @@ export const S27: React.FC<P> = ({fromSec}) => {
   const tColumnas = f('columnas', 819.5);
   return (
     <AbsoluteFill>
-      <Hero src="27_excel_monstruo.png" at={f('cuadro', 815)} h={640} />
-      <PhraseSwap from="no teme a la justicia…" to="…teme al EXCEL" at={f('cuadro', 815)} strikeAt={f('daño', 817)} toAt={f('daño', 817) + 8} fontSize={50} style={{left: 540, top: 110}} />
+      {/* BASE frame 0: la hoja de gastos (monstruo, sin marca) + funcionario pequeño */}
+      <FlowItem inAt={0} enter="scale" style={{left: 760, top: 300}}>
+        <Idle amp={4} speed={24}>
+          <DoodleSpreadsheet height={420} />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={6} enter="left" style={{left: 320, top: 380}}>
+        <Idle amp={4} speed={30}>
+          <PersonBase outfit="suit" expression="worried" height={340} />
+        </Idle>
+      </FlowItem>
+      <PhraseSwap from="no teme a la justicia…" to="…teme a la HOJA DE GASTOS" at={f('cuadro', 815)} strikeAt={f('daño', 817)} toAt={f('daño', 817) + 8} fontSize={48} style={{left: 480, top: 120}} />
       <FlowItem inAt={tColumnas} outAt={f('verdad', 823) - 2} enter="left" exit="fade" style={{left: 220, top: 780}}>
         <FreeText text="columnas · montos · fechas · proveedores" color="ink" fontSize={44} rotate={2} />
       </FlowItem>

@@ -662,6 +662,32 @@ export const DoodleCalculator: React.FC<D> = ({height = 180, style}) =>
     style
   );
 
+// Hoja de gastos (monstruo) — sin marca. La verdad en columnas.
+export const DoodleSpreadsheet: React.FC<D> = ({height = 200, style}) =>
+  box(
+    height,
+    230 / 200,
+    '0 0 230 200',
+    <g strokeLinejoin="round" strokeLinecap="round">
+      <rect x={18} y={22} width={194} height={160} rx={6} fill={CREAM} stroke={INK} strokeWidth={7} />
+      <rect x={18} y={22} width={194} height={34} fill="#3aa05a" stroke={INK} strokeWidth={6} />
+      {[76, 128, 172].map((x) => (
+        <path key={x} d={`M${x} 56 L${x} 182`} stroke="#9a917f" strokeWidth={4} />
+      ))}
+      {[90, 120, 150].map((y) => (
+        <path key={y} d={`M18 ${y} H212`} stroke="#9a917f" strokeWidth={4} />
+      ))}
+      {/* ojos de "monstruo" en la cabecera */}
+      <circle cx={70} cy={39} r={9} fill="#fff" stroke={INK} strokeWidth={3} />
+      <circle cx={160} cy={39} r={9} fill="#fff" stroke={INK} strokeWidth={3} />
+      <circle cx={72} cy={40} r={4} fill={INK} />
+      <circle cx={162} cy={40} r={4} fill={INK} />
+      {/* total en rojo (la verdad desnuda) */}
+      <rect x={134} y={154} width={70} height={24} rx={3} fill={RED} stroke={INK} strokeWidth={4} />
+    </g>,
+    style
+  );
+
 // Televisor (lo que te roban).
 export const DoodleTv: React.FC<D> = ({height = 160, style}) =>
   box(

@@ -25,16 +25,16 @@ export const S19: React.FC<P> = ({fromSec}) => {
   const tCochera = f('cochera', 595);
   return (
     <AbsoluteFill>
-      {/* intro: no firma contratos… firma novelas de misterio */}
-      <FlowItem inAt={f('contratos', 567)} outAt={tChampinon - 8} enter="down" exit="up" style={{left: 560, top: 200}}>
-        <FreeText text="no firma contratos…" color="ink" fontSize={54} rotate={-2} />
-      </FlowItem>
-      <FlowItem inAt={tNovelas} outAt={tChampinon - 8} enter="scale" exit="up" style={{left: 860, top: 430}}>
+      {/* BASE frame 0: el "contrato" (novela de misterio) + intro */}
+      <FlowItem inAt={0} outAt={tChampinon - 8} enter="scale" exit="up" style={{left: 840, top: 380}}>
         <Idle amp={5} speed={26}>
-          <DoodleScroll height={230} />
+          <DoodleScroll height={250} />
         </Idle>
       </FlowItem>
-      <FlowItem inAt={tNovelas + 6} outAt={tChampinon - 8} enter="right" exit="fade" style={{left: 600, top: 350}}>
+      <FlowItem inAt={4} outAt={tChampinon - 8} enter="down" exit="up" style={{left: 360, top: 250}}>
+        <FreeText text="no firma contratos…" color="ink" fontSize={52} rotate={-2} />
+      </FlowItem>
+      <FlowItem inAt={tNovelas + 6} outAt={tChampinon - 8} enter="right" exit="fade" style={{left: 380, top: 620}}>
         <FreeText text="…firma novelas de misterio" color="red" fontSize={48} rotate={2} />
       </FlowItem>
 
@@ -72,7 +72,7 @@ export const S20: React.FC<P> = ({fromSec}) => {
   ];
   return (
     <AbsoluteFill>
-      <RoleTitle at={f('inauguración', 598)} text="EL ARTE DE INAUGURAR" width={640} style={{left: 120, top: 80}} />
+      <RoleTitle at={6} text="EL ARTE DE INAUGURAR" width={640} style={{left: 120, top: 80}} />
       {sinObra.map(([t, at, p], i) => (
         <FlowItem key={i} inAt={at} outAt={tCinta - 6} enter={i % 2 ? 'right' : 'left'} exit="fade" style={{left: p.left, top: p.top}}>
           <FreeText text={t} color="ink" fontSize={46} rotate={p.rot} />
