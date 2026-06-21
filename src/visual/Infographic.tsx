@@ -3,30 +3,49 @@ import {AbsoluteFill} from 'remotion';
 import {COLORS} from '../theme';
 import {FONTS} from '../fonts';
 
+const titleSize = (text: string) => {
+  if (text.length > 34) return 56;
+  if (text.length > 27) return 62;
+  if (text.length > 21) return 68;
+  return 74;
+};
+
+const cardTitleSize = (text: string) => {
+  if (text.length > 20) return 25;
+  if (text.length > 15) return 28;
+  if (text.length > 11) return 31;
+  return 34;
+};
+
 export const IllustratedSlide: React.FC<{
   title: string;
   children: React.ReactNode;
   titleWidth?: number;
   titleAlign?: 'left' | 'center';
-}> = ({title, children, titleWidth = 1320, titleAlign = 'center'}) => (
-  <AbsoluteFill style={{backgroundColor: COLORS.sun, color: COLORS.ink}}>
+}> = ({title, children, titleWidth = 1510, titleAlign = 'center'}) => (
+  <AbsoluteFill style={{backgroundColor: COLORS.sun, color: COLORS.ink, overflow: 'hidden'}}>
     <div
       style={{
         position: 'absolute',
-        top: 42,
-        left: titleAlign === 'center' ? (1920 - titleWidth) / 2 : 104,
+        top: 26,
+        left: titleAlign === 'center' ? 76 : 104,
         width: titleWidth,
+        minHeight: 82,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: titleAlign === 'center' ? 'center' : 'flex-start',
         textAlign: titleAlign,
         fontFamily: FONTS.display,
-        fontSize: 74,
-        lineHeight: 1,
-        letterSpacing: 1,
+        fontSize: titleSize(title),
+        lineHeight: 0.94,
+        letterSpacing: 0.5,
         zIndex: 20,
+        overflowWrap: 'break-word',
       }}
     >
       {title}
     </div>
-    <div style={{position: 'absolute', left: 92, right: 92, top: 145, bottom: 54}}>{children}</div>
+    <div style={{position: 'absolute', left: 92, right: 92, top: 132, bottom: 44}}>{children}</div>
   </AbsoluteFill>
 );
 
@@ -44,6 +63,7 @@ export const PaperPanel: React.FC<{
       border: `7px solid ${COLORS.ink}`,
       borderRadius: 28,
       boxShadow: '8px 10px 0 rgba(21,18,13,0.15)',
+      overflow: 'visible',
       ...style,
     }}
   >
@@ -60,12 +80,12 @@ export const SplitPanel: React.FC<{
 }> = ({leftTitle, rightTitle, left, right, dividerColor = COLORS.ink}) => (
   <div style={{position: 'absolute', inset: 0}}>
     <PaperPanel style={{left: 20, top: 18, width: 820, height: 790}}>
-      <div style={{fontFamily: FONTS.display, fontSize: 54, textAlign: 'center', marginBottom: 10}}>{leftTitle}</div>
+      <div style={{fontFamily: FONTS.display, fontSize: cardTitleSize(leftTitle), lineHeight: 0.95, textAlign: 'center', marginBottom: 10}}>{leftTitle}</div>
       {left}
     </PaperPanel>
     <div style={{position: 'absolute', left: 865, top: 30, width: 12, height: 760, borderRadius: 8, background: dividerColor}} />
     <PaperPanel style={{right: 20, top: 18, width: 820, height: 790}}>
-      <div style={{fontFamily: FONTS.display, fontSize: 54, textAlign: 'center', marginBottom: 10}}>{rightTitle}</div>
+      <div style={{fontFamily: FONTS.display, fontSize: cardTitleSize(rightTitle), lineHeight: 0.95, textAlign: 'center', marginBottom: 10}}>{rightTitle}</div>
       {right}
     </PaperPanel>
   </div>
@@ -76,15 +96,19 @@ export const ObjectLabel: React.FC<{
   color?: string;
   style?: React.CSSProperties;
   size?: number;
-}> = ({text, color = COLORS.ink, style, size = 42}) => (
+  maxWidth?: number;
+  align?: 'left' | 'center' | 'right';
+}> = ({text, color = COLORS.ink, style, size = 42, maxWidth = 520, align = 'center'}) => (
   <div
     style={{
       position: 'absolute',
+      maxWidth,
       fontFamily: FONTS.display,
       fontSize: size,
       color,
-      lineHeight: 1,
-      whiteSpace: 'nowrap',
+      lineHeight: 0.95,
+      textAlign: align,
+      overflowWrap: 'break-word',
       ...style,
     }}
   >
@@ -96,46 +120,59 @@ export const HangingSign: React.FC<{
   text: string;
   color?: string;
   style?: React.CSSProperties;
-}> = ({text, color = COLORS.red, style}) => (
-  <div style={{position: 'absolute', ...style}}>
-    <div style={{position: 'absolute', left: 26, top: -44, width: 7, height: 46, background: COLORS.ink, transform: 'rotate(12deg)', transformOrigin: 'bottom'}} />
-    <div style={{position: 'absolute', right: 26, top: -44, width: 7, height: 46, background: COLORS.ink, transform: 'rotate(-12deg)', transformOrigin: 'bottom'}} />
-    <div
-      style={{
-        background: COLORS.paper,
-        border: `6px solid ${COLORS.ink}`,
-        borderRadius: 12,
-        padding: '14px 24px',
-        fontFamily: FONTS.display,
-        fontSize: 42,
-        color,
-        boxShadow: '5px 6px 0 rgba(21,18,13,0.16)',
-        whiteSpace: 'nowrap',
-      }}
-    >
-      {text}
+  maxWidth?: number;
+}> = ({text, color = COLORS.red, style, maxWidth = 330}) => {
+  const size = text.length > 15 ? 30 : text.length > 10 ? 35 : 42;
+  return (
+    <div style={{position: 'absolute', maxWidth, ...style}}>
+      <div style={{position: 'absolute', left: 26, top: -44, width: 7, height: 46, background: COLORS.ink, transform: 'rotate(12deg)', transformOrigin: 'bottom'}} />
+      <div style={{position: 'absolute', right: 26, top: -44, width: 7, height: 46, background: COLORS.ink, transform: 'rotate(-12deg)', transformOrigin: 'bottom'}} />
+      <div
+        style={{
+          background: COLORS.paper,
+          border: `6px solid ${COLORS.ink}`,
+          borderRadius: 12,
+          padding: '14px 20px',
+          boxSizing: 'border-box',
+          fontFamily: FONTS.display,
+          fontSize: size,
+          lineHeight: 0.92,
+          textAlign: 'center',
+          color,
+          boxShadow: '5px 6px 0 rgba(21,18,13,0.16)',
+          overflowWrap: 'break-word',
+        }}
+      >
+        {text}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export const StampLabel: React.FC<{
   text: string;
   color?: string;
   style?: React.CSSProperties;
   size?: number;
-}> = ({text, color = COLORS.red, style, size = 48}) => (
+  maxWidth?: number;
+  align?: 'left' | 'center' | 'right';
+}> = ({text, color = COLORS.red, style, size = 48, maxWidth = 560, align = 'center'}) => (
   <div
     style={{
       position: 'absolute',
+      maxWidth,
+      boxSizing: 'border-box',
       border: `8px solid ${color}`,
       color,
       borderRadius: 18,
-      padding: '12px 24px 8px',
+      padding: '12px 22px 9px',
       fontFamily: FONTS.display,
       fontSize: size,
-      lineHeight: 1,
+      lineHeight: 0.92,
+      textAlign: align,
+      overflowWrap: 'break-word',
       transform: 'rotate(-4deg)',
-      background: 'rgba(255,248,231,0.8)',
+      background: 'rgba(255,248,231,0.9)',
       ...style,
     }}
   >
@@ -146,15 +183,18 @@ export const StampLabel: React.FC<{
 export const PriceTag: React.FC<{
   text: string;
   style?: React.CSSProperties;
-}> = ({text, style}) => (
-  <div style={{position: 'absolute', ...style}}>
-    <svg width="280" height="118" viewBox="0 0 280 118">
-      <path d="M18 20 H225 L264 59 L225 98 H18 Z" fill={COLORS.red} stroke={COLORS.ink} strokeWidth="7" strokeLinejoin="round" />
-      <circle cx="226" cy="59" r="10" fill={COLORS.paper} stroke={COLORS.ink} strokeWidth="5" />
-      <text x="118" y="70" textAnchor="middle" fontFamily={FONTS.display} fontSize="34" fill={COLORS.paper}>{text}</text>
-    </svg>
-  </div>
-);
+}> = ({text, style}) => {
+  const fontSize = text.length > 18 ? 19 : text.length > 14 ? 22 : text.length > 10 ? 26 : 32;
+  return (
+    <div style={{position: 'absolute', width: 320, height: 118, ...style}}>
+      <svg width="320" height="118" viewBox="0 0 320 118">
+        <path d="M18 20 H262 L304 59 L262 98 H18 Z" fill={COLORS.red} stroke={COLORS.ink} strokeWidth="7" strokeLinejoin="round" />
+        <circle cx="265" cy="59" r="10" fill={COLORS.paper} stroke={COLORS.ink} strokeWidth="5" />
+        <text x="137" y="69" textAnchor="middle" fontFamily={FONTS.display} fontSize={fontSize} fill={COLORS.paper}>{text}</text>
+      </svg>
+    </div>
+  );
+};
 
 export const Arrow: React.FC<{
   from: [number, number];
@@ -195,7 +235,7 @@ export const Arrow: React.FC<{
           }}
         />
       </div>
-      {label && <ObjectLabel text={label} size={32} style={{left: (from[0] + to[0]) / 2 - 70, top: (from[1] + to[1]) / 2 - 46}} />}
+      {label && <ObjectLabel text={label} size={30} maxWidth={220} style={{left: (from[0] + to[0]) / 2 - 105, top: (from[1] + to[1]) / 2 - 50}} />}
     </>
   );
 };
@@ -209,15 +249,33 @@ export const MiniCard: React.FC<{
   <div
     style={{
       position: 'absolute',
+      boxSizing: 'border-box',
       background: COLORS.paper,
       border: `6px solid ${COLORS.ink}`,
       borderRadius: 24,
       padding: 18,
       boxShadow: '6px 7px 0 rgba(21,18,13,0.14)',
+      overflow: 'visible',
       ...style,
     }}
   >
-    <div style={{fontFamily: FONTS.display, fontSize: 34, color: accent, textAlign: 'center', marginBottom: 8}}>{title}</div>
+    <div
+      style={{
+        width: '100%',
+        minHeight: 42,
+        boxSizing: 'border-box',
+        padding: '0 4px',
+        fontFamily: FONTS.display,
+        fontSize: cardTitleSize(title),
+        lineHeight: 0.94,
+        color: accent,
+        textAlign: 'center',
+        overflowWrap: 'break-word',
+        marginBottom: 8,
+      }}
+    >
+      {title}
+    </div>
     {children}
   </div>
 );
