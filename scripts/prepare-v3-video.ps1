@@ -18,19 +18,20 @@ if (-not $ffmpeg) {
   exit 2
 }
 
-Write-Host "Preparando una copia compatible con Edge/Chrome..." -ForegroundColor Cyan
+Write-Host "Preparando los primeros 2 minutos para Edge/Chrome..." -ForegroundColor Cyan
 Write-Host "Origen:  $source"
 Write-Host "Salida:  $output"
 
 & ffmpeg -y `
   -i $source `
+  -t 120 `
   -map 0:v:0 `
   -map 0:a:0? `
   -c:v libx264 `
   -profile:v high `
   -level 4.1 `
   -pix_fmt yuv420p `
-  -preset fast `
+  -preset veryfast `
   -crf 20 `
   -c:a aac `
   -b:a 192k `
@@ -43,7 +44,7 @@ if ($LASTEXITCODE -ne 0 -or -not (Test-Path $output)) {
 }
 
 $file = Get-Item $output
-Write-Host "Video web creado correctamente:" -ForegroundColor Green
+Write-Host "Video web de 2 minutos creado correctamente:" -ForegroundColor Green
 Write-Host $file.FullName
 Write-Host ("Tamano: {0:N1} MB" -f ($file.Length / 1MB))
 Write-Host "Ahora ejecuta: npm run v3:dev" -ForegroundColor Green
