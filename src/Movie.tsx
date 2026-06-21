@@ -4,18 +4,18 @@ import {COLORS} from './theme';
 import {FONTS} from './fonts';
 import {PapaBase} from './components/PapaBase';
 import {Overlay} from './components/Overlay';
-import {Subtitles} from './components/Subtitles';
 import {SCENES} from './scenes/all';
 import {Segment} from './segments';
 import {ReducedMotionProvider} from './lib/reducedMotion';
 
-const FADE = 12; // frames — fundido corto (~0.4s)
+const FADE = 12;
 
-// Renderizador del modelo de cortes:
-// - PapaBase: audio + video de papá, continuos por debajo (papá limpio donde no hay escena).
-// - Cada tramo ANIM/TITLE se dibuja como escena opaca a pantalla completa.
-// - Cortes suaves: crossfade con papá al entrar/salir de un bloque de animación;
-//   entre animaciones contiguas, la entrante se solapa sobre la saliente (papá no asoma).
+// Montaje híbrido:
+// - PapaBase permanece continuo por debajo.
+// - Los segmentos PAPA muestran al presentador.
+// - Los segmentos TITLE/ANIM cubren al presentador con la infografía ilustrada.
+// Los subtítulos se conservan como datos de sincronización, pero no se dibujan:
+// la voz narra y la pantalla usa únicamente títulos, palabras clave e ilustraciones.
 export const Movie: React.FC<{segments: Segment[]; reducedMotion?: boolean}> = ({
   segments,
   reducedMotion,
@@ -24,7 +24,7 @@ export const Movie: React.FC<{segments: Segment[]; reducedMotion?: boolean}> = (
 
   return (
     <ReducedMotionProvider force={reducedMotion}>
-      <AbsoluteFill style={{backgroundColor: COLORS.cream, fontFamily: FONTS.body}}>
+      <AbsoluteFill style={{backgroundColor: COLORS.sun, fontFamily: FONTS.body}}>
         <PapaBase />
 
         {segments.map((seg, i) => {
@@ -57,9 +57,6 @@ export const Movie: React.FC<{segments: Segment[]; reducedMotion?: boolean}> = (
             </Sequence>
           );
         })}
-
-        {/* Subtítulos: última capa, encima de papá y de todas las animaciones. */}
-        <Subtitles />
       </AbsoluteFill>
     </ReducedMotionProvider>
   );
