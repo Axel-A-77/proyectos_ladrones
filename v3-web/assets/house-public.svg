@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 900">
+  <defs><filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="10" dy="12" stdDeviation="7" flood-opacity=".2"/></filter></defs>
+  <rect width="1800" height="900" fill="#f4c95d"/>
+  <text x="900" y="82" text-anchor="middle" font-family="Arial" font-size="66" font-weight="900" fill="#17130f">LA CASA DEL PUEBLO</text>
+  <g transform="translate(380 150)" filter="url(#sh)" stroke="#17130f" stroke-linejoin="round">
+    <path d="M80 250 L520 20 L960 250" fill="#e84a3c" stroke-width="15"/>
+    <rect x="135" y="250" width="770" height="540" rx="12" fill="#fff8e8" stroke-width="15"/>
+    <line x1="520" y1="250" x2="520" y2="790" stroke-width="11"/>
+    <line x1="135" y1="520" x2="905" y2="520" stroke-width="11"/>
+    <rect x="220" y="335" width="210" height="130" fill="#9bd8f1" stroke-width="11"/>
+    <path d="M325 335 V465 M220 400 H430" stroke-width="8"/>
+    <rect x="615" y="590" width="165" height="200" fill="#805031" stroke-width="11"/>
+    <circle cx="742" cy="695" r="13" fill="#f2b84b" stroke-width="6"/>
+    <rect x="205" y="590" width="230" height="125" rx="20" fill="#7454c8" stroke-width="11"/>
+    <path d="M225 645 Q320 565 415 645" fill="#8e73dc" stroke-width="8"/>
+  </g>
+  <g filter="url(#sh)" font-family="Arial" font-weight="900">
+    <g transform="translate(105 190)">
+      <circle cx="160" cy="105" r="88" fill="#fff" stroke="#17130f" stroke-width="11"/>
+      <path d="M95 95 Q132 60 165 88 M175 82 Q214 52 240 90" fill="none" stroke="#17130f" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="135" cy="108" r="10" fill="#17130f"/><circle cx="200" cy="106" r="10" fill="#17130f"/>
+      <path d="M118 145 Q160 177 208 140" fill="none" stroke="#17130f" stroke-width="8" stroke-linecap="round"/>
+      <path d="M75 250 Q160 175 245 250 L265 500 Q160 555 55 500 Z" fill="#303944" stroke="#17130f" stroke-width="12"/>
+      <path d="M145 255 L160 290 L178 255" fill="#e84a3c" stroke="#17130f" stroke-width="7"/>
+      <path d="M75 300 Q20 350 25 440 M245 300 Q305 345 300 440" fill="none" stroke="#17130f" stroke-width="24"/>
+      <circle cx="25" cy="440" r="28" fill="#fff" stroke="#17130f" stroke-width="9"/><circle cx="300" cy="440" r="28" fill="#fff" stroke="#17130f" stroke-width="9"/>
+      <path d="M120 500 L110 660 M200 500 L210 660" stroke="#17130f" stroke-width="25" stroke-linecap="round"/>
+      <path d="M75 680 Q112 650 150 680 M170 680 Q210 650 248 680" fill="#17130f" stroke="#17130f" stroke-width="8"/>
+      <rect x="250" y="205" width="115" height="55" rx="12" fill="#f2b84b" stroke="#17130f" stroke-width="8"/>
+      <circle cx="278" cy="232" r="9" fill="#17130f"/><circle cx="338" cy="232" r="9" fill="#17130f"/>
+      <path d="M303 220 V245" stroke="#17130f" stroke-width="7"/>
+      <text x="160" y="730" text-anchor="middle" font-size="32">TIENE LAS LLAVES</text>
+    </g>
+    <g transform="translate(700 210) rotate(-5)">
+      <rect width="330" height="115" rx="18" fill="#fff8e8" stroke="#e84a3c" stroke-width="11"/>
+      <text x="165" y="76" text-anchor="middle" font-size="50" fill="#e84a3c">SE VENDE</text>
+    </g>
+    <g transform="translate(650 645) rotate(3)">
+      <rect width="360" height="120" rx="18" fill="#fff8e8" stroke="#7454c8" stroke-width="11"/>
+      <text x="180" y="78" text-anchor="middle" font-size="46" fill="#7454c8">EN ALQUILER</text>
+    </g>
+    <g transform="translate(1325 545)">
+      <rect width="250" height="180" rx="20" fill="#f2b84b" stroke="#17130f" stroke-width="11"/>
+      <rect x="65" y="52" width="120" height="76" rx="12" fill="#fff8e8" stroke="#17130f" stroke-width="8"/>
+      <text x="125" y="104" text-anchor="middle" font-size="37">PEAJE</text>
+      <path d="M15 150 H235" stroke="#17130f" stroke-width="10"/>
+    </g>
+  </g>
+  <g stroke="#e84a3c" stroke-width="13" fill="none" stroke-linecap="round"><path d="M1160 700 C1260 665 1285 640 1330 610"/><path d="M1310 594 L1340 610 L1315 632"/></g>
+</svg>
