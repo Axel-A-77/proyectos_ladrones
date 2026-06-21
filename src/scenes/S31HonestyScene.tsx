@@ -13,17 +13,17 @@ export const S31HonestyScene: React.FC<{durationInFrames: number; fromSec: numbe
         <Idle amp={3} speed={30}><Diogenes height={500} /></Idle>
       </FlowItem>
       <FlowItem inAt={0} enter="scale" style={{left: 420, top: 80}}>
-        <MiniCard title="LA BUSQUEDA" accent={COLORS.red} style={{width: 410, height: 210}}>
+        <MiniCard title="LA BÚSQUEDA" accent={COLORS.red} style={{width: 410, height: 210}}>
           <StampLabel text="HONESTIDAD" color={COLORS.green} size={38} maxWidth={300} style={{left: 50, top: 105}} />
         </MiniCard>
       </FlowItem>
       <FlowItem inAt={18} enter="up" style={{left: 760, top: 75}}>
-        <MiniCard title="LAMPARA" accent={COLORS.gold} style={{width: 300, height: 250}}>
+        <MiniCard title="LÁMPARA" accent={COLORS.gold} style={{width: 300, height: 250}}>
           <div style={{position: 'absolute', left: 90, top: 95, width: 112, height: 112, borderRadius: '50%', background: COLORS.gold, border: `7px solid ${COLORS.ink}`}} />
         </MiniCard>
       </FlowItem>
       <FlowItem inAt={150} enter="up" style={{left: 760, top: 390}}>
-        <MiniCard title="AUDITORIA" accent={COLORS.blue} style={{width: 350, height: 270}}>
+        <MiniCard title="AUDITORÍA" accent={COLORS.blue} style={{width: 350, height: 270}}>
           <div style={{position: 'absolute', left: 52, top: 95}}><DoodleReceipt height={145} /></div>
           <div style={{position: 'absolute', left: 195, top: 100}}><DoodleMagnifier height={135} /></div>
         </MiniCard>
@@ -35,6 +35,6 @@ export const S31HonestyScene: React.FC<{durationInFrames: number; fromSec: numbe
         </MiniCard>
       </FlowItem>
     </PaperPanel>
-    <ChapterBadge outfit="auditor" label="DIOGENES" at={4} />
+    <ChapterBadge outfit="auditor" label="DIÓGENES" at={4} />
   </IllustratedSlide>
 );
