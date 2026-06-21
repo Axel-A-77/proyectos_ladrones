@@ -11,6 +11,7 @@
     <section id="stage-wrap" class="stage-wrap">
       <div id="stage" class="stage">
         <video id="presenter" preload="auto" playsinline>
+          <source src="/assets/video/papa_web.mp4" type="video/mp4" />
           <source src="/assets/video/papa_h264.mp4" type="video/mp4" />
         </video>
         <div id="video-shade" class="video-shade"></div>
@@ -18,8 +19,9 @@
         <div id="scene-layer" class="scene-layer"></div>
         <div id="hud-layer" class="hud-layer"></div>
         <div id="missing-video" class="missing-video" hidden>
-          <strong>No encuentro el video.</strong>
-          <span>Coloca papa_h264.mp4 en assets/video/.</span>
+          <strong>No puedo mostrar la imagen del video.</strong>
+          <span>El archivo existe, pero probablemente usa un codec no compatible con Edge/Chrome.</span>
+          <span>Ejecuta <code>powershell -ExecutionPolicy Bypass -File .\scripts\prepare-v3-video.ps1</code>.</span>
         </div>
       </div>
     </section>
