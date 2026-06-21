@@ -9,7 +9,16 @@ import {PresidenteInfographic} from './PresidenteInfographic';
 import {MagiaInfographic} from './MagiaInfographic';
 import {PuebloAuditorScene} from './PuebloAuditorScene';
 import {S19, S20} from './Act2';
-import {S21, S22, S23, S24, S26, S28, S29, S31} from './Act3';
+import {
+  S21Infographic,
+  S22Infographic,
+  S23Infographic,
+  S24Infographic,
+  S26Infographic,
+  S28Infographic,
+  S29Infographic,
+  S31Infographic,
+} from './Act3Infographic';
 import {S02, S03} from './Act1';
 import {S04, S05, S06} from './Act1b';
 import {S01Puertas} from './S01Puertas';
@@ -38,15 +47,15 @@ export const SCENES: Record<string, React.FC<SceneProps>> = {
   '18_eufemismos': EufemismosScene,
   '19_empresa_champinon': S19,
   '20_inauguracion_piedra': S20,
-  '21_campana_vs_alcapone': S21,
-  '22_ladron_control_remoto': S22,
-  '23_espias_clave': S23,
-  '24_antes_despues_mansion': S24,
+  '21_campana_vs_alcapone': S21Infographic,
+  '22_ladron_control_remoto': S22Infographic,
+  '23_espias_clave': S23Infographic,
+  '24_antes_despues_mansion': S24Infographic,
   '25_orquesta': S25Infographic,
-  '26_kiosko_hospital': S26,
+  '26_kiosko_hospital': S26Infographic,
   '27_excel_monstruo': S27Infographic,
-  '28_cuatro_juntos': S28,
-  '29_whatsapp_desvanece': S29,
+  '28_cuatro_juntos': S28Infographic,
+  '29_whatsapp_desvanece': S29Infographic,
   '30_pueblo_auditor': PuebloAuditorScene,
-  '31_diogenes_lampara': S31,
+  '31_diogenes_lampara': S31Infographic,
 };
