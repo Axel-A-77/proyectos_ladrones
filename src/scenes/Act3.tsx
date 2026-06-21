@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Img, useVideoConfig} from 'remotion';
 import {RoleTitle, PhraseSwap, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
-import {PersonBase} from '../visual/People';
+import {PersonBase, Outfit} from '../visual/People';
 import {DoodleHospital, DoodleCar} from './doodles';
 import {beatAt} from './util';
 
@@ -209,24 +209,24 @@ export const S28: React.FC<P> = ({fromSec}) => {
   const f = (kw: string, fb: number) => beatAt(kw, fb, fromSec, fps);
   const tServir = f('servir', 841);
   const tServirse = f('servirse', 848);
-  const cuatro: Array<[string, string, number]> = [
-    ['alcalde.png', 'ALCALDE', f('alcalde', 836.5)],
-    ['gobernador.png', 'GOBERNADOR', f('gobernador', 838)],
-    ['congresista.png', 'CONGRESISTA', f('congresista', 839)],
-    ['presidente.png', 'PRESIDENTE', f('presidente', 840)],
+  const cuatro: Array<[Outfit, string, number]> = [
+    ['mayor', 'ALCALDE', f('alcalde', 836.5)],
+    ['governor', 'GOBERNADOR', f('gobernador', 838)],
+    ['congress', 'CONGRESISTA', f('congresista', 839)],
+    ['president', 'PRESIDENTE', f('presidente', 840)],
   ];
   return (
     <AbsoluteFill>
       <RoleTitle at={6} text="LOS CUATRO" width={420} style={{left: 120, top: 60}} />
-      {/* los cuatro entran y SE QUEDAN como ancla visual */}
-      {cuatro.map(([src, label, at], i) => (
+      {/* los cuatro (PersonBase) entran y SE QUEDAN como ancla visual */}
+      {cuatro.map(([o, label, at], i) => (
         <React.Fragment key={i}>
-          <FlowItem inAt={at} enter="down" style={{left: 150 + i * 430, top: 150}}>
+          <FlowItem inAt={at} enter="down" style={{left: 170 + i * 410, top: 180}}>
             <Idle amp={5} speed={26 + i * 3}>
-              <Img src={ill(src)} style={{height: 330, objectFit: 'contain'}} />
+              <PersonBase outfit={o} expression="smug" height={360} />
             </Idle>
           </FlowItem>
-          <FlowItem inAt={at + 4} enter="up" style={{left: 180 + i * 430, top: 500}}>
+          <FlowItem inAt={at + 4} enter="up" style={{left: 210 + i * 410, top: 540, width: 220, textAlign: 'center'}}>
             <FreeText text={label} color="ink" fontSize={32} rotate={i % 2 ? 2 : -2} font="display" />
           </FlowItem>
         </React.Fragment>

@@ -1,27 +1,47 @@
 import React from 'react';
 import {AbsoluteFill, useVideoConfig} from 'remotion';
-import {RoleTitle, KenBurns, ill} from '../effects/kit';
+import {RoleTitle} from '../effects/kit';
 import {FlowItem, Idle, FreeText} from '../effects/flow';
-import {DoodleHouse, DoodleWindow, DoodleSofa, DoodleTollbooth, DoodleKey} from './doodles';
+import {DoodleHouse, DoodleWindow, DoodleSofa, DoodleTollbooth, DoodleKey, DoodleWallet} from './doodles';
+import {PersonBase} from '../visual/People';
 import {beatAt} from './util';
 
 type P = {durationInFrames: number; fromSec: number};
 
-// 02 — el silencio cómplice de los que callan (texto libre, sin cuadros).
-export const S02: React.FC<P> = ({fromSec, durationInFrames}) => {
+// 02 — el silencio cómplice: ciudadanos que callan mientras roban (PersonBase).
+export const S02: React.FC<P> = ({fromSec}) => {
   const {fps} = useVideoConfig();
   const f = (kw: string, fb: number) => beatAt(kw, fb, fromSec, fps);
   return (
     <AbsoluteFill>
-      <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', paddingBottom: 120}}>
-        <KenBurns src={ill('02_silencio_complice.png')} durationInFrames={durationInFrames} from={1.04} to={1.16} style={{height: 600, objectFit: 'contain'}} />
-      </AbsoluteFill>
-      <RoleTitle at={6} text="EL SILENCIO CÓMPLICE" width={620} style={{left: 120, top: 90}} />
-      <FlowItem inAt={f('callar', 78)} enter="left" style={{left: 230, top: 760}}>
-        <FreeText text="los que callan…" color="ink" fontSize={50} rotate={-3} />
+      <RoleTitle at={6} text="EL SILENCIO CÓMPLICE" width={620} style={{left: 120, top: 70}} />
+      {/* BASE frame 0: los ciudadanos que callan (boca sellada) */}
+      <FlowItem inAt={0} enter="left" style={{left: 170, top: 300}}>
+        <Idle amp={4} speed={30}>
+          <PersonBase outfit="citizen" expression="tired" height={430} />
+        </Idle>
       </FlowItem>
-      <FlowItem inAt={f('impunidad', 79.5)} enter="right" style={{left: 1260, top: 740}}>
-        <FreeText text="…son la IMPUNIDAD" color="red" fontSize={54} rotate={3} font="display" />
+      <FlowItem inAt={6} enter="up" style={{left: 430, top: 320}}>
+        <Idle amp={4} speed={26}>
+          <PersonBase outfit="citizen" expression="worried" height={410} skin="#d9a06b" flip />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={12} enter="right" style={{left: 690, top: 300}}>
+        <Idle amp={4} speed={28}>
+          <PersonBase outfit="citizen" expression="tired" height={430} skin="#c98a5a" />
+        </Idle>
+      </FlowItem>
+      {/* la billetera que se roban mientras callan */}
+      <FlowItem inAt={f('callar', 78)} enter="right" style={{left: 1180, top: 380}}>
+        <Idle amp={7} speed={20}>
+          <DoodleWallet height={190} />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={f('callar', 78)} enter="left" style={{left: 230, top: 770}}>
+        <FreeText text="al callar…" color="ink" fontSize={50} rotate={-3} />
+      </FlowItem>
+      <FlowItem inAt={f('impunidad', 79.5)} enter="right" style={{left: 1160, top: 720}}>
+        <FreeText text="…le dan IMPUNIDAD" color="red" fontSize={54} rotate={3} font="display" />
       </FlowItem>
     </AbsoluteFill>
   );

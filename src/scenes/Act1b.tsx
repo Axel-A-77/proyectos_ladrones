@@ -1,8 +1,8 @@
 import React from 'react';
-import {AbsoluteFill, Img, useVideoConfig} from 'remotion';
-import {PhraseSwap, ill} from '../effects/kit';
+import {AbsoluteFill, useVideoConfig} from 'remotion';
+import {PhraseSwap} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
-import {DoodlePot, DoodleSpoon} from './doodles';
+import {DoodlePot, DoodleSpoon, DoodleWallet} from './doodles';
 import {PersonBase} from '../visual/People';
 import {beatAt} from './util';
 
@@ -79,16 +79,28 @@ export const S06: React.FC<P> = ({fromSec}) => {
   const f = (kw: string, fb: number) => beatAt(kw, fb, fromSec, fps);
   return (
     <AbsoluteFill>
-      <FlowItem inAt={6} enter="scale" style={{left: 320, top: 240}}>
-        <Idle amp={4} speed={28}>
-          <Img src={ill('06_abrazo_roba_billetera.png')} style={{height: 660, objectFit: 'contain'}} />
+      {/* BASE frame 0: ciudadano (izq) y político (der) — el político le saca la billetera */}
+      <FlowItem inAt={0} enter="left" style={{left: 300, top: 270}}>
+        <Idle amp={4} speed={30}>
+          <PersonBase outfit="citizen" expression="hopeful" height={520} flip />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={4} enter="right" style={{left: 720, top: 255}}>
+        <Idle amp={4} speed={26}>
+          <PersonBase outfit="suit" expression="smug" arm="wave" height={540} flip />
+        </Idle>
+      </FlowItem>
+      {/* la billetera sale del bolsillo del ciudadano hacia el político */}
+      <FlowItem inAt={f('billetera', 149)} enter="right" style={{left: 640, top: 560}}>
+        <Idle amp={6} speed={18}>
+          <DoodleWallet height={150} />
         </Idle>
       </FlowItem>
       {/* el político (derecha) es quien habla: la viñeta lo apunta */}
-      <FlowItem inAt={f('abrazando', 146.5)} outAt={f('billetera', 149) + 4} enter="scale" exit="fade" style={{left: 700, top: 120}}>
+      <FlowItem inAt={f('abrazando', 146.5)} enter="scale" style={{left: 820, top: 110}}>
         <BubbleBox text={<>«te abrazo,<br />pueblo querido»</>} tailX={56} />
       </FlowItem>
-      <PhraseSwap from="«por amor al pueblo»" to="«…por amor a la billetera»" at={f('amor', 144)} strikeAt={f('billetera', 149)} toAt={f('billetera', 149) + 8} fontSize={46} style={{left: 1060, top: 470}} />
+      <PhraseSwap from="«por amor al pueblo»" to="«…por amor a la billetera»" at={f('amor', 144)} strikeAt={f('billetera', 149)} toAt={f('billetera', 149) + 8} fontSize={42} style={{left: 250, top: 790}} />
     </AbsoluteFill>
   );
 };
