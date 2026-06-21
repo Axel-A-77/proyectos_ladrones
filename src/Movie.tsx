@@ -15,7 +15,15 @@ export const Movie: React.FC<{segments: Segment[]; reducedMotion?: boolean}> = (
 
   return (
     <ReducedMotionProvider force={reducedMotion}>
-      <AbsoluteFill style={{backgroundColor: COLORS.sun, fontFamily: FONTS.body}}>
+      <AbsoluteFill
+        style={{
+          backgroundColor: COLORS.sun,
+          fontFamily: FONTS.body,
+          WebkitFontSmoothing: 'antialiased',
+          textRendering: 'geometricPrecision',
+          textShadow: '0 1px 0 rgba(255,248,231,0.95), 0 0 1px rgba(21,18,13,0.35)',
+        }}
+      >
         <PapaBase />
         {segments.map((seg, i) => {
           if (seg.kind === 'PAPA' || !seg.scene) return null;
