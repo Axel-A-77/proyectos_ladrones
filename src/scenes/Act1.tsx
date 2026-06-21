@@ -1,107 +1,127 @@
 import React from 'react';
-import {AbsoluteFill, useVideoConfig} from 'remotion';
-import {RoleTitle} from '../effects/kit';
-import {FlowItem, Idle, FreeText} from '../effects/flow';
+import {useVideoConfig} from 'remotion';
+import {FlowItem, Idle} from '../effects/flow';
 import {DoodleHouse, DoodleWindow, DoodleSofa, DoodleTollbooth, DoodleKey, DoodleWallet} from './doodles';
 import {PersonBase} from '../visual/People';
+import {ChapterBadge} from '../visual/ChapterBadge';
+import {Arrow, HangingSign, IllustratedSlide, MiniCard, PaperPanel, StampLabel} from '../visual/Infographic';
+import {COLORS} from '../theme';
+import {FONTS} from '../fonts';
 import {beatAt} from './util';
 
 type P = {durationInFrames: number; fromSec: number};
 
-// 02 — el silencio cómplice: ciudadanos que callan mientras roban (PersonBase).
+// 02 — diagrama causal: robo + silencio = impunidad.
 export const S02: React.FC<P> = ({fromSec}) => {
   const {fps} = useVideoConfig();
   const f = (kw: string, fb: number) => beatAt(kw, fb, fromSec, fps);
+  const tCallar = f('callar', 78);
+  const tImpunidad = f('impunidad', 79.5);
+
   return (
-    <AbsoluteFill>
-      <RoleTitle at={6} text="EL SILENCIO CÓMPLICE" width={620} style={{left: 120, top: 70}} />
-      {/* BASE frame 0: los ciudadanos que callan (boca sellada) */}
-      <FlowItem inAt={0} enter="left" style={{left: 170, top: 300}}>
-        <Idle amp={4} speed={30}>
-          <PersonBase outfit="citizen" expression="tired" height={430} />
-        </Idle>
+    <IllustratedSlide title="EL SILENCIO CÓMPLICE">
+      <FlowItem inAt={0} enter="left" style={{left: 20, top: 170}}>
+        <MiniCard title="1. ALGUIEN ROBA" accent={COLORS.red} style={{width: 420, height: 470}}>
+          <div style={{position: 'absolute', left: 55, top: 105}}>
+            <PersonBase outfit="suit" expression="smug" height={300} />
+          </div>
+          <div style={{position: 'absolute', left: 225, top: 245}}>
+            <DoodleWallet height={135} />
+          </div>
+        </MiniCard>
       </FlowItem>
-      <FlowItem inAt={6} enter="up" style={{left: 430, top: 320}}>
-        <Idle amp={4} speed={26}>
-          <PersonBase outfit="citizen" expression="worried" height={410} skin="#d9a06b" flip />
-        </Idle>
+
+      <FlowItem inAt={tCallar} enter="up" style={{left: 635, top: 110}}>
+        <PaperPanel style={{width: 520, height: 590}}>
+          <div style={{fontFamily: FONTS.display, fontSize: 42, textAlign: 'center'}}>2. EL PUEBLO CALLA</div>
+          {[0, 1, 2].map((i) => (
+            <div key={i} style={{position: 'absolute', left: 40 + i * 150, top: 130 + (i % 2) * 24}}>
+              <PersonBase
+                outfit="citizen"
+                expression={i === 1 ? 'worried' : 'tired'}
+                height={300}
+                skin={i === 1 ? '#D9A06B' : i === 2 ? '#C98A5A' : undefined}
+                flip={i === 2}
+              />
+              <div style={{position: 'absolute', left: 45, top: 110, width: 74, height: 10, borderRadius: 7, background: COLORS.red, transform: 'rotate(-4deg)'}} />
+            </div>
+          ))}
+        </PaperPanel>
       </FlowItem>
-      <FlowItem inAt={12} enter="right" style={{left: 690, top: 300}}>
-        <Idle amp={4} speed={28}>
-          <PersonBase outfit="citizen" expression="tired" height={430} skin="#c98a5a" />
-        </Idle>
+
+      <FlowItem inAt={tCallar + 5} enter="scale" style={{left: 470, top: 340}}>
+        <Arrow from={[0, 0]} to={[135, 0]} color={COLORS.ink} />
       </FlowItem>
-      {/* la billetera que se roban mientras callan */}
-      <FlowItem inAt={f('callar', 78)} enter="right" style={{left: 1180, top: 380}}>
-        <Idle amp={7} speed={20}>
-          <DoodleWallet height={190} />
-        </Idle>
+      <FlowItem inAt={tImpunidad - 4} enter="scale" style={{left: 1170, top: 340}}>
+        <Arrow from={[0, 0]} to={[145, 0]} color={COLORS.ink} />
       </FlowItem>
-      <FlowItem inAt={f('callar', 78)} enter="left" style={{left: 230, top: 770}}>
-        <FreeText text="al callar…" color="ink" fontSize={50} rotate={-3} />
+
+      <FlowItem inAt={tImpunidad} enter="scale" style={{left: 1320, top: 275}}>
+        <StampLabel text="IMPUNIDAD" size={52} />
       </FlowItem>
-      <FlowItem inAt={f('impunidad', 79.5)} enter="right" style={{left: 1160, top: 720}}>
-        <FreeText text="…le dan IMPUNIDAD" color="red" fontSize={54} rotate={3} font="display" />
+      <FlowItem inAt={tImpunidad + 5} enter="up" style={{left: 1320, top: 410}}>
+        <div style={{fontFamily: FONTS.hand, fontSize: 40, width: 320, textAlign: 'center', lineHeight: 1.1}}>
+          El robo deja de parecer una excepción.
+        </div>
       </FlowItem>
-    </AbsoluteFill>
+      <ChapterBadge outfit="citizen" label="EL PUEBLO" at={8} />
+    </IllustratedSlide>
   );
 };
 
-// 03 — recibe las LLAVES de la CASA del pueblo y empieza a vender las VENTANAS,
-// alquilar la SALA y poner PEAJE al baño. Doodles en código, texto libre, flujo.
+// 03 — la casa se mantiene como ancla; cada abuso se integra dentro de ella.
 export const S03: React.FC<P> = ({fromSec}) => {
   const {fps} = useVideoConfig();
   const f = (kw: string, fb: number) => beatAt(kw, fb, fromSec, fps);
   const tLlaves = f('llaves', 89.6);
-  const tCasa = f('casa', 90.2);
   const tVent = f('ventanas', 93.7);
   const tSala = f('sala', 95.4);
   const tPeaje = f('peaje', 96.4);
+
   return (
-    <AbsoluteFill>
-      {/* definición: entra y se va antes de la casa (texto libre) */}
-      <FlowItem inAt={f('poder', 82)} outAt={tLlaves - 8} enter="left" exit="up" style={{left: 520, top: 120}}>
-        <FreeText text="abuso del PODER" color="ink" fontSize={56} rotate={-2} font="display" />
-      </FlowItem>
-      <FlowItem inAt={f('privado', 85.5)} outAt={tLlaves - 8} enter="right" exit="up" style={{left: 1050, top: 130}}>
-        <FreeText text="= beneficio PRIVADO" color="red" fontSize={56} rotate={2} font="display" />
-      </FlowItem>
-
-      {/* las llaves (breve) */}
-      <FlowItem inAt={tLlaves} outAt={tCasa + 22} enter="scale" exit="up" style={{left: 600, top: 210}}>
-        <DoodleKey height={90} />
-      </FlowItem>
-
-      {/* la casa: BASE desde frame 0 (ancla con flote sutil) */}
-      <FlowItem inAt={4} enter="scale" style={{left: 690, top: 300}}>
-        <Idle amp={5} speed={30}>
-          <DoodleHouse height={460} />
+    <IllustratedSlide title="LA CASA DEL PUEBLO">
+      <FlowItem inAt={0} enter="scale" style={{left: 530, top: 80}}>
+        <Idle amp={3} speed={34}>
+          <DoodleHouse height={650} />
         </Idle>
       </FlowItem>
 
-      {/* ventana SE VENDE — SE QUEDA (acumula) */}
-      <FlowItem inAt={tVent} enter="left" style={{left: 230, top: 380}}>
-        <DoodleWindow height={200} />
+      <FlowItem inAt={tLlaves} enter="left" style={{left: 30, top: 250}}>
+        <PersonBase outfit="suit" expression="smug" arm="up" height={440} />
       </FlowItem>
-      <FlowItem inAt={tVent + 4} enter="left" style={{left: 215, top: 330}}>
-        <FreeText text="SE VENDE" color="red" fontSize={46} rotate={-4} font="display" />
-      </FlowItem>
-
-      {/* sofá EN ALQUILER — SE QUEDA (acumula) */}
-      <FlowItem inAt={tSala} enter="left" style={{left: 250, top: 660}}>
-        <DoodleSofa height={170} />
-      </FlowItem>
-      <FlowItem inAt={tSala + 4} enter="left" style={{left: 240, top: 610}}>
-        <FreeText text="EN ALQUILER" color="ink" fontSize={44} rotate={3} font="display" />
+      <FlowItem inAt={tLlaves + 4} enter="scale" style={{left: 330, top: 410}}>
+        <DoodleKey height={110} />
       </FlowItem>
 
-      {/* peaje (entra y se queda) */}
-      <FlowItem inAt={tPeaje} enter="right" style={{left: 1420, top: 470}}>
-        <DoodleTollbooth height={230} />
+      <FlowItem inAt={tVent} enter="left" style={{left: 255, top: 70}}>
+        <DoodleWindow height={185} />
       </FlowItem>
-      <FlowItem inAt={tPeaje + 4} enter="right" style={{left: 1340, top: 410}}>
-        <FreeText text="PEAJE AL BAÑO" color="red" fontSize={46} rotate={3} font="display" />
+      <FlowItem inAt={tVent + 4} enter="scale" style={{left: 220, top: 20}}>
+        <HangingSign text="SE VENDE" />
       </FlowItem>
-    </AbsoluteFill>
+      <FlowItem inAt={tVent + 7} enter="scale" style={{left: 460, top: 195}}>
+        <Arrow from={[0, 0]} to={[140, 35]} color={COLORS.red} />
+      </FlowItem>
+
+      <FlowItem inAt={tSala} enter="up" style={{left: 330, top: 570}}>
+        <MiniCard title="SALA" accent={COLORS.blue} style={{width: 360, height: 230}}>
+          <div style={{position: 'absolute', left: 55, top: 70}}><DoodleSofa height={135} /></div>
+          <HangingSign text="EN ALQUILER" color={COLORS.ink} style={{left: 62, top: 155, transform: 'scale(0.72)'}} />
+        </MiniCard>
+      </FlowItem>
+
+      <FlowItem inAt={tPeaje} enter="right" style={{left: 1320, top: 380}}>
+        <MiniCard title="BAÑO" accent={COLORS.red} style={{width: 340, height: 350}}>
+          <div style={{position: 'absolute', left: 70, top: 80}}><DoodleTollbooth height={220} /></div>
+          <HangingSign text="PEAJE" style={{left: 90, top: 280, transform: 'scale(0.8)'}} />
+        </MiniCard>
+      </FlowItem>
+
+      <FlowItem inAt={tPeaje + 5} enter="scale" style={{left: 1160, top: 490}}>
+        <Arrow from={[0, 0]} to={[150, 0]} color={COLORS.red} />
+      </FlowItem>
+
+      <ChapterBadge outfit="suit" label="EL PODER" at={8} />
+    </IllustratedSlide>
   );
 };
