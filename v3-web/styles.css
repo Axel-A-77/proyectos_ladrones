@@ -1,0 +1,219 @@
+:root {
+  --ink: #17130f;
+  --paper: #fff8e8;
+  --sun: #f4c95d;
+  --red: #e84a3c;
+  --blue: #59a9d8;
+  --green: #79b84a;
+  --gold: #f2b84b;
+  --purple: #7454c8;
+  --shadow: rgba(23, 19, 15, 0.18);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: #11151a; font-family: Arial, Helvetica, sans-serif; color: #f4f4f4; }
+body { overflow-x: hidden; }
+button, input { font: inherit; }
+
+.workspace { width: min(100vw, 1760px); margin: 0 auto; padding: 18px; }
+.stage-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,.42);
+}
+.stage {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: top left;
+  background: var(--sun);
+  overflow: hidden;
+}
+#presenter {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+.video-shade { position: absolute; inset: 0; background: transparent; pointer-events: none; }
+.fx-layer, .scene-layer, .hud-layer { position: absolute; inset: 0; pointer-events: none; }
+.scene-layer { z-index: 10; }
+.fx-layer { z-index: 20; }
+.hud-layer { z-index: 30; }
+
+.full-scene {
+  position: absolute;
+  inset: 0;
+  background: var(--sun);
+  color: var(--ink);
+  overflow: hidden;
+}
+.scene-title {
+  position: absolute;
+  left: 110px;
+  right: 110px;
+  top: 54px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 76px;
+  letter-spacing: 1px;
+  line-height: .95;
+  text-transform: uppercase;
+  text-shadow: 0 4px 0 rgba(255,255,255,.38);
+}
+.paper {
+  position: absolute;
+  background: var(--paper);
+  border: 8px solid var(--ink);
+  border-radius: 34px;
+  box-shadow: 12px 14px 0 var(--shadow);
+}
+.label {
+  display: inline-block;
+  background: var(--paper);
+  border: 7px solid currentColor;
+  border-radius: 20px;
+  padding: 14px 24px 10px;
+  font-weight: 900;
+  line-height: .95;
+  box-shadow: 7px 8px 0 var(--shadow);
+}
+.sticker {
+  position: absolute;
+  background: var(--paper);
+  border: 7px solid var(--ink);
+  border-radius: 18px;
+  padding: 13px 20px 10px;
+  font-weight: 900;
+  box-shadow: 7px 8px 0 var(--shadow);
+}
+.keyword {
+  position: absolute;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--red);
+  border: 7px solid var(--ink);
+  border-radius: 16px;
+  padding: 15px 24px 10px;
+  box-shadow: 8px 9px 0 var(--shadow);
+}
+
+.present-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.55), transparent 48%, transparent 72%, rgba(0,0,0,.18));
+}
+.lower-third {
+  position: absolute;
+  left: 90px;
+  bottom: 70px;
+  max-width: 820px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 7px solid var(--ink);
+  border-radius: 24px;
+  padding: 20px 30px 17px;
+  font-size: 42px;
+  font-weight: 900;
+  box-shadow: 10px 12px 0 rgba(0,0,0,.25);
+}
+.side-card {
+  position: absolute;
+  right: 70px;
+  top: 170px;
+  width: 470px;
+  min-height: 500px;
+  background: var(--sun);
+  border: 8px solid var(--ink);
+  border-radius: 34px;
+  box-shadow: 12px 15px 0 rgba(0,0,0,.24);
+  padding: 28px;
+  color: var(--ink);
+}
+
+svg { overflow: visible; }
+svg text { font-family: Arial, Helvetica, sans-serif; font-weight: 900; }
+
+.pop { animation: pop .48s cubic-bezier(.2,.9,.25,1.2) both; }
+.slide-left { animation: slideLeft .55s cubic-bezier(.22,.9,.28,1) both; }
+.slide-right { animation: slideRight .55s cubic-bezier(.22,.9,.28,1) both; }
+.fade { animation: fade .42s ease both; }
+.float { animation: float 2.4s ease-in-out infinite; }
+.pulse { animation: pulse 1.4s ease-in-out infinite; }
+.shake { animation: shake .55s ease both; }
+.draw-line { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 1.2s ease forwards; }
+
+.controls {
+  margin-top: 16px;
+  background: #1c222a;
+  border: 1px solid #343d48;
+  border-radius: 14px;
+  padding: 14px;
+}
+.control-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.controls button {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 15px;
+  background: #303a46;
+  color: white;
+  cursor: pointer;
+}
+.controls button:hover { background: #3b4654; }
+.controls .primary { background: #d64538; }
+.controls .primary:hover { background: #ec5548; }
+.timecode { margin-left: auto; font-variant-numeric: tabular-nums; color: #dfe7ef; }
+#seek { width: 100%; margin-top: 13px; accent-color: #e84a3c; }
+.legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 8px; color: #aab5c0; font-size: 14px; }
+.missing-video {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  background: #111;
+  color: white;
+  text-align: center;
+  font-size: 32px;
+  z-index: 999;
+}
+.missing-video code { color: #ffd66d; }
+
+body.recording .controls { display: none; }
+body.recording .workspace { width: 100vw; padding: 0; }
+body.recording .stage-wrap { border-radius: 0; box-shadow: none; }
+
+.countdown {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,.7);
+  color: white;
+  font-size: 240px;
+  font-weight: 900;
+  z-index: 9999;
+}
+
+@keyframes pop { from { opacity: 0; transform: scale(.68) rotate(-4deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@keyframes slideLeft { from { opacity: 0; transform: translateX(-90px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideRight { from { opacity: 0; transform: translateX(90px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-10px) rotate(-1deg); } 75% { transform: translateX(10px) rotate(1deg); } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+@media (max-width: 900px) {
+  .workspace { padding: 8px; }
+  .controls { padding: 10px; }
+  .timecode { width: 100%; margin-left: 0; }
+}
