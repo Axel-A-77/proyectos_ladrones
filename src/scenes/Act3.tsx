@@ -24,18 +24,19 @@ export const S21: React.FC<P> = ({fromSec}) => {
   const tAlcapone = f('capone', 661);
   return (
     <AbsoluteFill>
-      <Hero src="21_campana_vs_alcapone.png" at={f('lejos', 629)} h={640} />
-      <FlowItem inAt={f('campaña', 631.5)} outAt={tAlergia - 4} enter="left" exit="fade" style={{left: 150, top: 150}}>
-        <FreeText text="en campaña: te abraza" color="green" fontSize={50} rotate={-3} font="display" />
+      {/* BASE desde frame 0: el contraste campaña vs Al Capone */}
+      <Hero src="21_campana_vs_alcapone.png" at={0} h={640} />
+      <FlowItem inAt={f('campaña', 631.5)} enter="left" style={{left: 150, top: 150}}>
+        <FreeText text="en campaña: te abraza" color="green" fontSize={48} rotate={-3} font="display" />
       </FlowItem>
-      <FlowItem inAt={f('mercados', 634)} outAt={tAlergia - 4} enter="left" exit="fade" style={{left: 180, top: 760}}>
-        <FreeText text="…besos, fotos, caldo común" color="ink" fontSize={44} rotate={2} />
+      <FlowItem inAt={f('mercados', 634)} enter="left" style={{left: 150, top: 760}}>
+        <FreeText text="…besos, fotos, caldo común" color="ink" fontSize={42} rotate={2} />
       </FlowItem>
-      <FlowItem inAt={tAlergia} outAt={tAlcapone + 60} enter="right" exit="fade" style={{left: 1180, top: 160}}>
-        <FreeText text="al ganar: «alergia al ciudadano»" color="red" fontSize={44} rotate={3} />
+      <FlowItem inAt={tAlergia} enter="right" style={{left: 1200, top: 150}}>
+        <FreeText text="al ganar: «alergia»" color="red" fontSize={48} rotate={3} font="display" />
       </FlowItem>
-      <FlowItem inAt={tAlcapone} enter="up" style={{left: 720, top: 790}}>
-        <FreeText text="ahora «se desplaza», como Al Capone S. XXI" color="red" fontSize={46} rotate={-2} font="display" />
+      <FlowItem inAt={tAlcapone} enter="up" style={{left: 1120, top: 760}}>
+        <FreeText text="…«se desplaza» (Al Capone S. XXI)" color="red" fontSize={42} rotate={-2} />
       </FlowItem>
     </AbsoluteFill>
   );
@@ -90,12 +91,13 @@ export const S24: React.FC<P> = ({fromSec}) => {
   const tMansion = f('mansión', 717);
   return (
     <AbsoluteFill>
-      <Hero src="24_antes_despues_mansion.png" at={f('milagros', 706)} h={640} />
-      <FlowItem inAt={f('hambre', 708)} outAt={tMansion + 70} enter="left" exit="fade" style={{left: 160, top: 200}}>
-        <FreeText text="ANTES: muerto de hambre" color="ink" fontSize={48} rotate={-3} font="display" />
+      {/* BASE desde frame 0: el panel antes/después */}
+      <Hero src="24_antes_despues_mansion.png" at={0} h={650} />
+      <FlowItem inAt={f('hambre', 708)} enter="left" style={{left: 130, top: 180}}>
+        <FreeText text="ANTES: muerto de hambre" color="ink" fontSize={46} rotate={-3} font="display" />
       </FlowItem>
-      <FlowItem inAt={f('rolex', 712.5)} outAt={tMansion + 70} enter="right" exit="fade" style={{left: 1280, top: 200}}>
-        <FreeText text="DESPUÉS: Rolex y mansión" color="red" fontSize={48} rotate={3} font="display" />
+      <FlowItem inAt={f('rolex', 712.5)} enter="right" style={{left: 1230, top: 180}}>
+        <FreeText text="DESPUÉS: Rolex y mansión" color="red" fontSize={46} rotate={3} font="display" />
       </FlowItem>
       <FlowItem inAt={f('esfuerzo', 725)} enter="up" style={{left: 560, top: 790}}>
         <FreeText text="«¿cómo lo logré? con mucho esfuerzo»" color="ink" fontSize={48} rotate={-2} />
@@ -244,29 +246,38 @@ export const S28: React.FC<P> = ({fromSec}) => {
   );
 };
 
-// 29 — optimista: «nadie se dará cuenta»… la memoria dura lo que un estado de WhatsApp.
+// 29 — el optimista (base frame 0) y sus creencias que se acumulan; la memoria = un estado de WhatsApp.
 export const S29: React.FC<P> = ({fromSec}) => {
   const {fps} = useVideoConfig();
   const f = (kw: string, fb: number) => beatAt(kw, fb, fromSec, fps);
   const tWhatsapp = f('whatsapp', 881);
-  const creencias: Array<[string, number, {left: number; top: number; rot: number}]> = [
-    ['…todo se olvidará', f('olvidará', 872), {left: 230, top: 250, rot: -3}],
-    ['…el pueblo se cansará', f('cansará', 874), {left: 1280, top: 300, rot: 3}],
-    ['…la justicia se demorará', f('justicia', 876), {left: 260, top: 560, rot: 2}],
+  const creencias: Array<[string, number, number]> = [
+    ['«nadie se dará cuenta»', f('nadie', 870), 300],
+    ['«todo se olvidará»', f('olvidará', 872), 392],
+    ['«el pueblo se cansará»', f('cansará', 874), 484],
+    ['«la justicia se demorará»', f('justicia', 876), 576],
   ];
   return (
     <AbsoluteFill>
-      <FlowItem inAt={f('nadie', 870)} outAt={tWhatsapp - 6} enter="scale" exit="fade" style={{left: 520, top: 130}}>
-        <FreeText text="«nadie se dará cuenta»…" color="ink" fontSize={54} rotate={-2} />
+      {/* BASE desde frame 0: el corrupto optimista */}
+      <FlowItem inAt={0} enter="scale" style={{left: 110, top: 300}}>
+        <Idle amp={5} speed={26}>
+          <PersonBase outfit="suit" expression="smug" height={440} />
+        </Idle>
       </FlowItem>
-      {creencias.map(([t, at, p], i) => (
-        <FlowItem key={i} inAt={at} outAt={tWhatsapp - 6} enter={i % 2 ? 'right' : 'left'} exit="fade" style={{left: p.left, top: p.top}}>
-          <FreeText text={t} color="ink" fontSize={46} rotate={p.rot} />
+      <FlowItem inAt={4} outAt={creencias[0][1]} enter="down" exit="fade" style={{left: 470, top: 120}}>
+        <FreeText text="el optimista cree que…" color="ink" fontSize={48} rotate={-2} />
+      </FlowItem>
+      {/* sus creencias se ACUMULAN */}
+      {creencias.map(([t, at, top], i) => (
+        <FlowItem key={i} inAt={at} enter="left" style={{left: 470, top}}>
+          <FreeText text={t} color="ink" fontSize={44} rotate={i % 2 ? 2 : -2} />
         </FlowItem>
       ))}
-      <Hero src="29_whatsapp_desvanece.png" at={tWhatsapp} h={560} />
-      <FlowItem inAt={tWhatsapp + 6} enter="up" style={{left: 520, top: 790}}>
-        <FreeText text="…la memoria dura lo que un estado de WhatsApp" color="red" fontSize={46} rotate={-2} />
+      {/* el "estado" efímero que se desvanece */}
+      <Hero src="29_whatsapp_desvanece.png" at={tWhatsapp} h={420} left={1360} top={250} />
+      <FlowItem inAt={tWhatsapp + 6} enter="up" style={{left: 560, top: 790}}>
+        <FreeText text="…la memoria dura lo que un estado de WhatsApp" color="red" fontSize={42} rotate={-2} />
       </FlowItem>
     </AbsoluteFill>
   );

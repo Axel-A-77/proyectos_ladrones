@@ -4,6 +4,7 @@ import {RoleTitle, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
 import {DoodleStamp, DoodleScroll, DoodleClock, DoodleMoneyBag} from './doodles';
 import {ChapterBadge} from '../visual/ChapterBadge';
+import {PersonBase} from '../visual/People';
 import {beatAt} from './util';
 
 // EL CONGRESISTA (5:59–7:12) — molde: personaje transitorio, un visual por concepto
@@ -39,9 +40,9 @@ export const CongresistaScene: React.FC<{durationInFrames: number; fromSec: numb
   return (
     <AbsoluteFill>
       {/* INTRO — congresista (transitorio) */}
-      <FlowItem inAt={4} outAt={tDebate - 6} enter="left" exit="left" style={{left: 470, top: 280}}>
+      <FlowItem inAt={4} outAt={tDebate - 6} enter="left" exit="left" style={{left: 470, top: 250}}>
         <Idle amp={6} speed={26}>
-          <Img src={ill('congresista.png')} style={{height: 560, objectFit: 'contain'}} />
+          <PersonBase outfit="congress" expression="smug" height={580} />
         </Idle>
       </FlowItem>
       <RoleTitle at={6} text="EL CONGRESISTA" width={600} style={{left: 120, top: 80}} />

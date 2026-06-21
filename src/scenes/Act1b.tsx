@@ -12,27 +12,28 @@ type CK = 'ink' | 'red' | 'gold' | 'green' | 'cream' | 'white' | 'night' | 'mute
 export const S04: React.FC<P> = ({fromSec}) => {
   const {fps} = useVideoConfig();
   const f = (kw: string, fb: number) => beatAt(kw, fb, fromSec, fps);
-  const outAll = f('justicia', 116) + 60;
   const palabras: Array<[string, string, number, {left: number; top: number; color: CK; rot: number; big?: boolean}]> = [
-    ['PUEBLO', 'pueblo', 113, {left: 1080, top: 240, color: 'green', rot: -3, big: true}],
-    ['FUTURO', 'futuro', 113.6, {left: 1440, top: 320, color: 'gold', rot: 3, big: true}],
-    ['transparencia', 'transparencia', 114, {left: 1040, top: 440, color: 'ink', rot: -2}],
-    ['desarrollo', 'desarrollo', 114.6, {left: 1430, top: 520, color: 'green', rot: 3}],
-    ['cambio', 'cambio', 115, {left: 1120, top: 630, color: 'red', rot: -3}],
-    ['justicia social', 'justicia', 115.5, {left: 1340, top: 700, color: 'ink', rot: 2}],
+    ['PUEBLO', 'pueblo', 113, {left: 980, top: 230, color: 'green', rot: -3, big: true}],
+    ['FUTURO', 'futuro', 113.6, {left: 1400, top: 300, color: 'gold', rot: 3, big: true}],
+    ['transparencia', 'transparencia', 114, {left: 940, top: 430, color: 'ink', rot: -2}],
+    ['desarrollo', 'desarrollo', 114.6, {left: 1380, top: 470, color: 'green', rot: 3}],
+    ['cambio', 'cambio', 115, {left: 1010, top: 600, color: 'red', rot: -3}],
+    ['justicia social', 'justicia', 115.5, {left: 1300, top: 660, color: 'ink', rot: 2}],
   ];
   return (
     <AbsoluteFill>
-      <FlowItem inAt={f('hambre', 102.5)} outAt={outAll} enter="left" style={{left: 300, top: 300}}>
+      {/* BASE desde frame 0: el candidato humilde (muerto de hambre) */}
+      <FlowItem inAt={0} enter="left" style={{left: 250, top: 280}}>
         <Idle amp={5} speed={28}>
-          <ThinHumble height={620} />
+          <ThinHumble height={640} />
         </Idle>
       </FlowItem>
-      <FlowItem inAt={f('hambre', 102.5) + 8} outAt={f('palabras', 111)} enter="scale" exit="fade" style={{left: 380, top: 160}}>
+      <FlowItem inAt={10} outAt={f('palabras', 111)} enter="scale" exit="fade" style={{left: 330, top: 140}}>
         <BubbleBox text={<>«vengo a servir<br />al pueblo…»</>} tailX={48} />
       </FlowItem>
+      {/* las palabras nobles se ACUMULAN alrededor (nube) */}
       {palabras.map(([t, kw, sec, p], i) => (
-        <FlowItem key={i} inAt={f(kw, sec)} outAt={outAll} enter={i % 2 ? 'right' : 'left'} exit="fade" style={{left: p.left, top: p.top}}>
+        <FlowItem key={i} inAt={f(kw, sec)} enter={i % 2 ? 'right' : 'left'} style={{left: p.left, top: p.top}}>
           <FreeText text={t} color={p.color} fontSize={p.big ? 58 : 48} rotate={p.rot} font={p.big ? 'display' : 'hand'} />
         </FlowItem>
       ))}

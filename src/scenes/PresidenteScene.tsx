@@ -3,6 +3,7 @@ import {AbsoluteFill, Img, useVideoConfig} from 'remotion';
 import {RoleTitle, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
 import {ChapterBadge} from '../visual/ChapterBadge';
+import {PersonBase} from '../visual/People';
 import {beatAt} from './util';
 
 // EL PRESIDENTE (7:22–8:51) — molde: personaje transitorio, texto libre, un visual
@@ -43,9 +44,9 @@ export const PresidenteScene: React.FC<{durationInFrames: number; fromSec: numbe
   return (
     <AbsoluteFill>
       {/* INTRO — presidente (transitorio) + «caiga quien caiga» */}
-      <FlowItem inAt={4} outAt={tArriba - 6} enter="left" exit="left" style={{left: 470, top: 280}}>
+      <FlowItem inAt={4} outAt={tArriba - 6} enter="left" exit="left" style={{left: 470, top: 250}}>
         <Idle amp={6} speed={26}>
-          <Img src={ill('presidente.png')} style={{height: 580, objectFit: 'contain'}} />
+          <PersonBase outfit="president" expression="smug" height={580} />
         </Idle>
       </FlowItem>
       <FlowItem inAt={tCaiga} outAt={tArriba - 6} enter="scale" exit="fade" style={{left: 700, top: 180}}>
@@ -85,9 +86,9 @@ export const PresidenteScene: React.FC<{durationInFrames: number; fromSec: numbe
       ))}
 
       {/* «yo también estoy indignado» — el presidente vuelve, voz de mártir */}
-      <FlowItem inAt={tIndignado - 6} enter="left" style={{left: 470, top: 300}}>
+      <FlowItem inAt={tIndignado - 6} enter="left" style={{left: 470, top: 260}}>
         <Idle amp={5} speed={26}>
-          <Img src={ill('presidente.png')} style={{height: 560, objectFit: 'contain'}} />
+          <PersonBase outfit="president" expression="worried" arm="chest" height={560} />
         </Idle>
       </FlowItem>
       <FlowItem inAt={tIndignado} outAt={tPatria - 2} enter="scale" exit="fade" style={{left: 720, top: 200}}>

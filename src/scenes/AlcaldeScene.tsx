@@ -4,6 +4,7 @@ import {COLORS} from '../theme';
 import {RoleTitle, Sparkles, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
 import {ChapterBadge} from '../visual/ChapterBadge';
+import {PersonBase} from '../visual/People';
 import {beatAt} from './util';
 
 // Doodle "vereda con huecos" (código) — el visual de la "oportunidad".
@@ -32,9 +33,9 @@ export const AlcaldeScene: React.FC<{durationInFrames: number; fromSec: number}>
   return (
     <AbsoluteFill>
       {/* INTRO — el alcalde aparece, lo presentamos y se va (no se queda) */}
-      <FlowItem inAt={4} outAt={tOport + 18} enter="left" exit="left" style={{left: 470, top: 280}}>
+      <FlowItem inAt={4} outAt={tOport + 18} enter="left" exit="left" style={{left: 470, top: 250}}>
         <Idle amp={6} speed={26}>
-          <Img src={ill('alcalde.png')} style={{height: 560, objectFit: 'contain'}} />
+          <PersonBase outfit="mayor" expression="smug" height={580} />
         </Idle>
       </FlowItem>
       <FlowItem inAt={22} outAt={tOport + 14} enter="scale" exit="fade" style={{left: 700, top: 170}}>
