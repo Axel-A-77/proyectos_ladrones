@@ -14,6 +14,7 @@
     "qa:stills": "node scripts/stills.mjs",
     "qa": "npm run typecheck && npm run qa:timeline && npm run qa:captions && npm run qa:assets",
     "render": "remotion render LosLadrones out/ladrones_FINAL.mp4",
+    "render:gpt": "remotion render LosLadrones out/ladrones_FINAL_gpt.mp4",
     "render:full": "remotion render LosLadrones out/ladrones_FINAL.mp4",
     "upgrade": "remotion upgrade"
   },
