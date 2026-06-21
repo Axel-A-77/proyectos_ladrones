@@ -1,23 +1,23 @@
 // Paleta y constantes globales del proyecto.
+// Dirección artística: infografía ilustrada doodle con fondo amarillo cálido uniforme.
 export const COLORS = {
   white: '#FFFFFF',
-  paper: '#FFFDF7', // casi blanco cálido (rellenos que deben resaltar sobre el amarillo)
-  cream: '#FBF8F1', // crema (descansos / momentos serios, sin negros)
-  sun: '#FBE7A1', // amarillo cálido (fondo principal de comedia)
+  paper: '#FFF8E7', // paneles internos, tarjetas y recortes ilustrados
+  cream: '#FFF1C9', // rellenos internos; ya no se usa como fondo exterior de escenas
+  sun: '#F4C95D', // fondo principal uniforme de todas las escenas ilustradas
   ink: '#15120D', // tinta (contornos, texto)
-  red: '#E0392B',
-  gold: '#F2B705',
-  night: '#17140E', // (sin uso por ahora: el usuario pidió sin negros)
-  green: '#1F9E5A',
+  red: '#E94B3C',
+  gold: '#F2B84B',
+  night: '#17140E',
+  green: '#79B84A',
   blue: '#5AA6D8',
   orange: '#F29A4A',
   purple: '#7454C8',
-  muted: '#9A917F',
+  muted: '#8E877A',
 } as const;
 
 // Ruta del video base (resuelve a /assets por setPublicDir).
-// Usamos la copia H.264 para que se previsualice en el navegador (el HEVC original
-// solo se decodifica en el render). El render final también usa esta copia.
+// El medio no se versiona por tamaño, pero debe existir antes del render final.
 export const PAPA_SRC = 'video/papa_h264.mp4';
 
 export const FPS = 30;

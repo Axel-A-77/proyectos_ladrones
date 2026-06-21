@@ -1,0 +1,25 @@
+name: Redesign QA
+
+on:
+  push:
+    branches:
+      - redesign/infografia-ilustrada-v2
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run qa:timeline
+      - run: npm run qa:captions
+      - run: npm run qa:assets

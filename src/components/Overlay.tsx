@@ -4,25 +4,17 @@ import {COLORS} from '../theme';
 
 export type Tone = 'sun' | 'cream' | 'dark';
 
-// Fondo por tono. SIN negros (decisión del usuario): 'dark' cae a crema.
-const TONE_BG: Record<Tone, string> = {
-  sun: COLORS.sun, // amarillo cálido — comedia
-  cream: COLORS.cream, // crema — descansos / momentos serios
-  dark: COLORS.cream,
-};
-
-// Envoltorio de cada corte a animación: fondo según el tono y fundidos cortos
-// de entrada/salida (transición suave, no corte seco). Cubre toda la pantalla.
+// Todas las escenas ilustradas comparten el mismo lienzo exterior amarillo.
+// El tono se conserva en el modelo de datos por compatibilidad, pero las variaciones
+// serias o cómicas deben construirse con paneles internos, no cambiando el fondo global.
 export const Overlay: React.FC<{
   tone?: Tone;
   durationInFrames: number;
   fadeIn?: number;
   fadeOut?: number;
   children: React.ReactNode;
-}> = ({tone = 'sun', durationInFrames, fadeIn = 10, fadeOut = 10, children}) => {
+}> = ({durationInFrames, fadeIn = 10, fadeOut = 10, children}) => {
   const frame = useCurrentFrame();
-  // fadeIn/fadeOut = 0 => sin fundido (el título arranca opaco; entre animaciones
-  // contiguas la saliente no se desvanece, la entrante la cubre solapada).
   const opIn =
     fadeIn <= 0
       ? 1
@@ -37,14 +29,9 @@ export const Overlay: React.FC<{
           extrapolateLeft: 'clamp',
           extrapolateRight: 'clamp',
         });
-  const opacity = Math.min(opIn, opOut);
-  const bg = TONE_BG[tone] ?? COLORS.sun;
 
-  // Fondo plano del tono + degradado cálido muy sutil (centro un pelín más claro).
   return (
-    <AbsoluteFill style={{opacity}}>
-      <AbsoluteFill style={{backgroundColor: bg}} />
-      <AbsoluteFill style={{background: `radial-gradient(ellipse at 50% 40%, ${COLORS.paper}66 0%, transparent 70%)`}} />
+    <AbsoluteFill style={{backgroundColor: COLORS.sun, opacity: Math.min(opIn, opOut)}}>
       {children}
     </AbsoluteFill>
   );

@@ -2,52 +2,45 @@ import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {COLORS} from '../theme';
 import {FONTS} from '../fonts';
-import {DrawPath} from '../effects/DrawPath';
 import {FlowItem} from '../effects/flow';
 import {PersonBase, Outfit, Expression} from '../visual/People';
 import {useReducedMotion} from '../lib/reducedMotion';
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
-// El "recorrido": los personajes que iremos viendo (mapa inicial de temas).
-const CAST: Array<{outfit: Outfit; label: string; expr: Expression}> = [
-  {outfit: 'mayor', label: 'ALCALDE', expr: 'smug'},
-  {outfit: 'governor', label: 'GOBERNADOR', expr: 'greedy'},
-  {outfit: 'congress', label: 'CONGRESISTA', expr: 'tired'},
-  {outfit: 'president', label: 'PRESIDENTE', expr: 'smug'},
-  {outfit: 'auditor', label: 'EL AUDITOR', expr: 'neutral'},
+const CAST: Array<{outfit: Outfit; label: string; expr: Expression; color: string}> = [
+  {outfit: 'mayor', label: 'ALCALDE', expr: 'smug', color: COLORS.orange},
+  {outfit: 'governor', label: 'GOBERNADOR', expr: 'greedy', color: COLORS.purple},
+  {outfit: 'congress', label: 'CONGRESISTA', expr: 'tired', color: COLORS.blue},
+  {outfit: 'president', label: 'PRESIDENTE', expr: 'smug', color: COLORS.red},
+  {outfit: 'auditor', label: 'AUDITOR', expr: 'hopeful', color: COLORS.green},
 ];
 
-// 00_titulo — título + mapa del recorrido (aparición progresiva de la "galería").
 export const TitleScene: React.FC = () => {
   const frame = useCurrentFrame();
   const reduced = useReducedMotion();
-
-  const titleOpacity = reduced ? 1 : interpolate(frame, [0, 12], [0, 1], clamp);
-  const titleY = reduced ? 0 : interpolate(frame, [0, 16], [22, 0], clamp);
+  const opacity = reduced ? 1 : interpolate(frame, [0, 12], [0, 1], clamp);
+  const y = reduced ? 0 : interpolate(frame, [0, 16], [22, 0], clamp);
 
   return (
-    <AbsoluteFill style={{alignItems: 'center'}}>
-      <div style={{marginTop: 60, textAlign: 'center', opacity: titleOpacity, transform: `translateY(${titleY}px)`}}>
-        <div style={{fontFamily: FONTS.hand, color: COLORS.ink, fontSize: 36, marginBottom: 4, opacity: 0.8}}>
-          un comentario con humor (y verdad)
-        </div>
-        <div style={{fontFamily: FONTS.poster, color: COLORS.ink, fontSize: 88, lineHeight: 1.02, letterSpacing: 2}}>LOS LADRONES</div>
-        <div style={{fontFamily: FONTS.poster, color: COLORS.red, fontSize: 88, lineHeight: 1.02, letterSpacing: 2}}>DE CUELLO Y CORBATA</div>
-        <svg width={900} height={64} viewBox="0 0 900 64" style={{display: 'block', margin: '6px auto 0'}}>
-          <DrawPath d="M30 36 C 240 60, 480 12, 660 34 S 840 56, 872 28" delay={reduced ? 0 : 14} duration={22} stroke={COLORS.gold} strokeWidth={12} />
-        </svg>
+    <AbsoluteFill style={{backgroundColor: COLORS.sun, alignItems: 'center'}}>
+      <div style={{marginTop: 42, textAlign: 'center', opacity, transform: `translateY(${y}px)`}}>
+        <div style={{fontFamily: FONTS.hand, color: COLORS.ink, fontSize: 34}}>una reflexion con humor y memoria</div>
+        <div style={{fontFamily: FONTS.poster, color: COLORS.ink, fontSize: 86, lineHeight: 1}}>LOS LADRONES</div>
+        <div style={{fontFamily: FONTS.poster, color: COLORS.red, fontSize: 82, lineHeight: 1}}>DE CUELLO Y CORBATA</div>
       </div>
 
-      {/* galería del recorrido — aparece uno por uno */}
+      <svg width="1600" height="160" viewBox="0 0 1600 160" style={{position: 'absolute', left: 160, top: 405}}>
+        <path d="M90 90 C 380 10, 550 150, 800 75 C 1050 0, 1220 145, 1510 70" fill="none" stroke={COLORS.ink} strokeWidth="9" strokeLinecap="round" strokeDasharray="18 16" />
+      </svg>
+
       {CAST.map((c, i) => (
-        <FlowItem key={i} inAt={26 + i * 11} enter="up" dist={40} style={{left: 215 + i * 330, top: 470}}>
-          <PersonBase outfit={c.outfit} expression={c.expr} height={230} />
-        </FlowItem>
-      ))}
-      {CAST.map((c, i) => (
-        <FlowItem key={`l${i}`} inAt={30 + i * 11} enter="scale" style={{left: 215 + i * 330, top: 720, width: 200, textAlign: 'center'}}>
-          <div style={{fontFamily: FONTS.display, color: i === 4 ? COLORS.green : COLORS.ink, fontSize: 30}}>{c.label}</div>
+        <FlowItem key={c.label} inAt={22 + i * 10} enter="up" dist={36} style={{left: 160 + i * 330, top: 470}}>
+          <div style={{width: 250, height: 365, borderRadius: 28, background: COLORS.paper, border: `7px solid ${COLORS.ink}`, boxShadow: '7px 9px 0 rgba(21,18,13,.15)', position: 'relative'}}>
+            <div style={{position: 'absolute', left: 58, top: 24}}><PersonBase outfit={c.outfit} expression={c.expr} height={245} /></div>
+            <div style={{position: 'absolute', right: 16, top: 16, width: 50, height: 50, borderRadius: '50%', background: c.color, border: `5px solid ${COLORS.ink}`}} />
+            <div style={{position: 'absolute', left: 12, right: 12, bottom: 22, textAlign: 'center', fontFamily: FONTS.display, color: c.outfit === 'auditor' ? COLORS.green : COLORS.ink, fontSize: 29}}>{c.label}</div>
+          </div>
         </FlowItem>
       ))}
     </AbsoluteFill>
