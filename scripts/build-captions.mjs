@@ -1,12 +1,19 @@
-// Convierte subtitulos.srt -> src/data/captions.json (tiempos en segundos).
-// Vuelve a correrlo si cambias el .srt:  npm run captions
-import {readFileSync, writeFileSync, mkdirSync} from 'node:fs';
+// Convierte el SRT CORREGIDO -> src/data/captions.json (tiempos en segundos).
+// FUENTE MAESTRA: subtitulos_corregidos.srt (NO subtitulos_original.srt).
+// Edita correcciones en subtitulos_corregidos.srt y re-corre: npm run captions
+import {readFileSync, writeFileSync, mkdirSync, existsSync} from 'node:fs';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
-const srtPath = resolve(root, 'subtitulos.srt');
+const corrected = resolve(root, 'subtitulos_corregidos.srt');
+// Por seguridad: si no existe el corregido, NO usar el original (evita reintroducir typos).
+if (!existsSync(corrected)) {
+  console.error('FALTA subtitulos_corregidos.srt — no se regeneran captions para no reintroducir errores.');
+  process.exit(1);
+}
+const srtPath = corrected;
 const outPath = resolve(root, 'src/data/captions.json');
 
 const toSec = (t) => {

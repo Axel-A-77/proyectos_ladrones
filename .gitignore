@@ -10,6 +10,9 @@ masters/*.mp4
 masters/*.wav
 masters/ilustraciones_raw/
 
+# Salida del recorte de PNG (build; regenerable con scripts/trim-transparent-assets.mjs)
+assets/ilustraciones/trimmed/
+
 # Sistema
 .DS_Store
 Thumbs.db
