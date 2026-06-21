@@ -17,8 +17,8 @@ import {
   S26Infographic,
   S28Infographic,
   S29Infographic,
-  S31Infographic,
 } from './Act3Infographic';
+import {S31HonestyScene} from './S31HonestyScene';
 import {S02, S03} from './Act1';
 import {S04, S05, S06} from './Act1b';
 import {S01Puertas} from './S01Puertas';
@@ -57,5 +57,5 @@ export const SCENES: Record<string, React.FC<SceneProps>> = {
   '28_cuatro_juntos': S28Infographic,
   '29_whatsapp_desvanece': S29Infographic,
   '30_pueblo_auditor': PuebloAuditorScene,
-  '31_diogenes_lampara': S31Infographic,
+  '31_diogenes_lampara': S31HonestyScene,
 };
