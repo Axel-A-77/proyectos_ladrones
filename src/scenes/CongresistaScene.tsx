@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Img, useVideoConfig} from 'remotion';
 import {RoleTitle, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
-import {DoodleStamp, DoodleScroll, DoodleClock, DoodleMoneyBag} from './doodles';
+import {DoodleStamp, DoodleScroll, DoodleClock, DoodleMoneyBag, DoodleCurul} from './doodles';
 import {ChapterBadge} from '../visual/ChapterBadge';
 import {PersonBase} from '../visual/People';
 import {beatAt} from './util';
@@ -61,8 +61,18 @@ export const CongresistaScene: React.FC<{durationInFrames: number; fromSec: numb
         <FreeText text="…roba con reglamento, sello, ley" color="red" fontSize={44} rotate={2} />
       </FlowItem>
 
-      {/* duerme en el debate (PNG) — textos a la IZQUIERDA, no encima del personaje */}
-      <Hero src="14_congresista_dormido.png" at={tDebate} out={tMueble - 8} />
+      {/* duerme en el debate: congresista en su CURUL (PersonBase, sin clipart realista) */}
+      <FlowItem inAt={tDebate} outAt={tMueble - 8} enter="scale" exit="up" style={{left: 660, top: 250}}>
+        <Idle amp={3} speed={34}>
+          <PersonBase outfit="congress" expression="tired" height={440} />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={tDebate} outAt={tMueble - 8} enter="up" exit="up" style={{left: 600, top: 500}}>
+        <DoodleCurul height={230} />
+      </FlowItem>
+      <FlowItem inAt={tDebate + 10} outAt={tMueble - 8} enter="scale" exit="fade" style={{left: 920, top: 240}}>
+        <FreeText text="Zzz" color="muted" fontSize={60} rotate={8} font="display" />
+      </FlowItem>
       <FlowItem inAt={tDebate + 6} outAt={tVotar - 2} enter="left" exit="fade" style={{left: 70, top: 330}}>
         <FreeText text="duerme en el debate…" color="ink" fontSize={48} rotate={-2} />
       </FlowItem>

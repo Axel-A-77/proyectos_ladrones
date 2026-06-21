@@ -627,6 +627,23 @@ export const DoodleReceipt: React.FC<D> = ({height = 180, style}) =>
     style
   );
 
+// Curul / banca parlamentaria (con micrófono). El personaje se sienta detrás.
+export const DoodleCurul: React.FC<D> = ({height = 200, style}) =>
+  box(
+    height,
+    280 / 200,
+    '0 0 280 200',
+    <g strokeLinejoin="round" strokeLinecap="round">
+      <path d="M150 92 L150 52" stroke={INK} strokeWidth={5} />
+      <circle cx={150} cy={44} r={11} fill="#3a3a3a" stroke={INK} strokeWidth={5} />
+      <rect x={18} y={92} width={244} height={92} fill="#8a5a2b" stroke={INK} strokeWidth={7} />
+      <rect x={10} y={78} width={260} height={18} rx={5} fill="#9c6a38" stroke={INK} strokeWidth={6} />
+      <rect x={42} y={110} width={66} height={50} rx={5} fill="#7a4f28" stroke={INK} strokeWidth={5} />
+      <rect x={172} y={110} width={66} height={50} rx={5} fill="#7a4f28" stroke={INK} strokeWidth={5} />
+    </g>,
+    style
+  );
+
 // Calculadora.
 export const DoodleCalculator: React.FC<D> = ({height = 180, style}) =>
   box(

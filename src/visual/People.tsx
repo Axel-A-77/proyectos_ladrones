@@ -136,22 +136,30 @@ export const PersonBase: React.FC<{
   height?: number;
   arm?: ArmPose;
   skin?: string;
+  build?: 'normal' | 'thin' | 'fat';
   flip?: boolean;
   style?: React.CSSProperties;
-}> = ({outfit = 'citizen', expression = 'neutral', height = 320, arm = 'down', skin = '#E8B98A', flip = false, style}) => {
+}> = ({outfit = 'citizen', expression = 'neutral', height = 320, arm = 'down', skin = '#E8B98A', build = 'normal', flip = false, style}) => {
   const c = OUTFITS[outfit];
   const w = (height * 220) / 360;
 
-  // Brazo derecho (del personaje) según pose.
+  // Complexión: SOLO cambia torso/hombros (no la cabeza ni la altura).
+  const B = {
+    normal: {torso: 'M62 250 L66 168 Q110 140 154 168 L158 250 Z', shL: 70, shR: 150},
+    thin: {torso: 'M80 250 L84 172 Q110 152 136 172 L140 250 Z', shL: 86, shR: 134},
+    fat: {torso: 'M44 250 Q34 194 64 166 Q110 136 156 166 Q186 194 176 250 Z', shL: 62, shR: 158},
+  }[build];
+
+  // Brazo derecho (del personaje) según pose, anclado al hombro de la complexión.
   const rightArm =
     arm === 'up'
-      ? 'M150 196 C 176 182, 184 150, 178 120'
+      ? `M${B.shR} 196 C ${B.shR + 26} 182, ${B.shR + 34} 150, ${B.shR + 28} 120`
       : arm === 'wave'
-        ? 'M150 196 C 180 188, 196 168, 192 140'
+        ? `M${B.shR} 196 C ${B.shR + 30} 188, ${B.shR + 46} 168, ${B.shR + 42} 140`
         : arm === 'chest'
-          ? 'M150 196 C 150 220, 126 226, 112 214'
-          : 'M152 196 C 168 220, 170 250, 166 276';
-  const rightHandXY = arm === 'up' ? [178, 116] : arm === 'wave' ? [192, 136] : arm === 'chest' ? [110, 212] : [166, 280];
+          ? `M${B.shR} 196 C ${B.shR} 220, ${B.shR - 24} 226, 112 214`
+          : `M${B.shR + 2} 196 C ${B.shR + 18} 220, ${B.shR + 20} 250, ${B.shR + 16} 276`;
+  const rightHandXY = arm === 'up' ? [B.shR + 28, 116] : arm === 'wave' ? [B.shR + 42, 136] : arm === 'chest' ? [110, 212] : [B.shR + 16, 280];
 
   return (
     <svg width={w} height={height} viewBox="0 0 220 360" style={{transform: flip ? 'scaleX(-1)' : undefined, ...style}}>
@@ -163,10 +171,10 @@ export const PersonBase: React.FC<{
         <ellipse cx={76} cy={336} rx={20} ry={11} fill={INK} />
         <ellipse cx={144} cy={336} rx={20} ry={11} fill={INK} />
         {/* brazo izquierdo (del personaje) */}
-        <path d="M70 196 C 54 220, 52 250, 56 276" fill="none" stroke={c.body} strokeWidth={28} />
-        <circle cx={56} cy={280} r={13} fill={skin} stroke={INK} strokeWidth={5} />
+        <path d={`M${B.shL} 196 C ${B.shL - 16} 220, ${B.shL - 18} 250, ${B.shL - 14} 276`} fill="none" stroke={c.body} strokeWidth={28} />
+        <circle cx={B.shL - 14} cy={280} r={13} fill={skin} stroke={INK} strokeWidth={5} />
         {/* torso */}
-        <path d="M62 250 L66 168 Q110 140 154 168 L158 250 Z" fill={c.body} stroke={INK} strokeWidth={8} />
+        <path d={B.torso} fill={c.body} stroke={INK} strokeWidth={8} />
         {/* cuello */}
         <rect x={98} y={150} width={24} height={22} fill={skin} stroke={INK} strokeWidth={5} />
         {/* cuello camisa / corbata */}

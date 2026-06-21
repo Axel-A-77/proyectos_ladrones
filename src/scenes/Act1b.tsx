@@ -2,7 +2,8 @@ import React from 'react';
 import {AbsoluteFill, Img, useVideoConfig} from 'remotion';
 import {PhraseSwap, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
-import {ThinHumble, FatGlutton, DoodlePot, DoodleSpoon} from './doodles';
+import {DoodlePot, DoodleSpoon} from './doodles';
+import {PersonBase} from '../visual/People';
 import {beatAt} from './util';
 
 type P = {durationInFrames: number; fromSec: number};
@@ -23,9 +24,9 @@ export const S04: React.FC<P> = ({fromSec}) => {
   return (
     <AbsoluteFill>
       {/* BASE desde frame 0: el candidato humilde (muerto de hambre) */}
-      <FlowItem inAt={0} enter="left" style={{left: 250, top: 280}}>
+      <FlowItem inAt={0} enter="left" style={{left: 250, top: 250}}>
         <Idle amp={5} speed={28}>
-          <ThinHumble height={640} />
+          <PersonBase outfit="suit" expression="hopeful" build="thin" arm="chest" height={620} />
         </Idle>
       </FlowItem>
       <FlowItem inAt={10} outAt={f('palabras', 111)} enter="scale" exit="fade" style={{left: 330, top: 140}}>
@@ -47,9 +48,9 @@ export const S05: React.FC<P> = ({fromSec}) => {
   const f = (kw: string, fb: number) => beatAt(kw, fb, fromSec, fps);
   return (
     <AbsoluteFill>
-      <FlowItem inAt={6} enter="left" style={{left: 280, top: 250}}>
+      <FlowItem inAt={6} enter="left" style={{left: 250, top: 250}}>
         <Idle amp={5} speed={24}>
-          <FatGlutton height={640} />
+          <PersonBase outfit="suit" expression="greedy" build="fat" height={620} />
         </Idle>
       </FlowItem>
       <FlowItem inAt={f('presupuesto', 124.5)} enter="down" style={{left: 320, top: 660}}>

@@ -4,6 +4,7 @@ import {RoleTitle, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
 import {DoodleBench, DoodleBulb, DoodleTrafficLight, DoodleHospital, DoodleRoad, DoodleSchool, DoodleBridge} from './doodles';
 import {ChapterBadge} from '../visual/ChapterBadge';
+import {PersonBase} from '../visual/People';
 import {beatAt} from './util';
 
 // EL GOBERNADOR (3:22–4:50) — molde: personaje transitorio, texto libre, un visual
@@ -38,9 +39,9 @@ export const GobernadorScene: React.FC<{durationInFrames: number; fromSec: numbe
   return (
     <AbsoluteFill>
       {/* INTRO — gobernador (transitorio) + bocadillo apuntándolo */}
-      <FlowItem inAt={4} outAt={tBancas + 10} enter="left" exit="left" style={{left: 470, top: 300}}>
+      <FlowItem inAt={4} outAt={tBancas + 10} enter="left" exit="left" style={{left: 470, top: 250}}>
         <Idle amp={6} speed={26}>
-          <Img src={ill('gobernador.png')} style={{height: 560, objectFit: 'contain'}} />
+          <PersonBase outfit="governor" expression="smug" height={580} />
         </Idle>
       </FlowItem>
       <FlowItem inAt={20} outAt={tBancas + 6} enter="scale" exit="fade" style={{left: 700, top: 190}}>
