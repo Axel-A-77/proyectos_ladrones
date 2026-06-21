@@ -1,5 +1,6 @@
 import React from 'react';
 import {TitleScene} from './TitleScene';
+import {IntroReflectionScene} from './IntroReflectionScene';
 import {EufemismosScene} from './EufemismosScene';
 import {AlcaldeScene} from './AlcaldeScene';
 import {GobernadorScene} from './GobernadorScene';
@@ -18,9 +19,11 @@ import {S27Infographic} from './S27Infographic';
 export type SceneProps = {durationInFrames: number; fromSec: number};
 
 const S00: React.FC<SceneProps> = () => <TitleScene />;
+const S00Reflection: React.FC<SceneProps> = () => <IntroReflectionScene />;
 
 export const SCENES: Record<string, React.FC<SceneProps>> = {
   '00_titulo': S00,
+  '00_reflexion': S00Reflection,
   '01_puerta_sillon_billetera': S01Puertas,
   '02_silencio_complice': S02,
   '03_casa_del_pueblo': S03,
