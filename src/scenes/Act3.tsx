@@ -1,9 +1,10 @@
 import React from 'react';
 import {AbsoluteFill, Img, useVideoConfig} from 'remotion';
+import {COLORS} from '../theme';
 import {RoleTitle, PhraseSwap, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
-import {PersonBase, Outfit} from '../visual/People';
-import {DoodleHospital, DoodleCar} from './doodles';
+import {PersonBase, Outfit, Diogenes} from '../visual/People';
+import {DoodleHospital, DoodleCar, DoodleWallet, DoodleCountry, DoodleDetector} from './doodles';
 import {beatAt} from './util';
 
 type P = {durationInFrames: number; fromSec: number};
@@ -24,19 +25,40 @@ export const S21: React.FC<P> = ({fromSec}) => {
   const tAlcapone = f('capone', 661);
   return (
     <AbsoluteFill>
-      {/* BASE desde frame 0: el contraste campaña vs Al Capone */}
-      <Hero src="21_campana_vs_alcapone.png" at={0} h={640} />
-      <FlowItem inAt={f('campaña', 631.5)} enter="left" style={{left: 150, top: 150}}>
-        <FreeText text="en campaña: te abraza" color="green" fontSize={48} rotate={-3} font="display" />
+      {/* divisoria: campaña | poder */}
+      <div style={{position: 'absolute', left: 957, top: 150, width: 4, height: 620, background: COLORS.muted}} />
+      {/* IZQUIERDA — en campaña: abraza al pueblo (PersonBase) */}
+      <FlowItem inAt={0} enter="left" style={{left: 250, top: 290}}>
+        <Idle amp={4} speed={28}>
+          <PersonBase outfit="suit" expression="hopeful" arm="wave" height={420} flip />
+        </Idle>
       </FlowItem>
-      <FlowItem inAt={f('mercados', 634)} enter="left" style={{left: 150, top: 760}}>
-        <FreeText text="…besos, fotos, caldo común" color="ink" fontSize={42} rotate={2} />
+      <FlowItem inAt={6} enter="up" style={{left: 110, top: 480}}>
+        <PersonBase outfit="citizen" expression="hopeful" height={230} />
       </FlowItem>
-      <FlowItem inAt={tAlergia} enter="right" style={{left: 1200, top: 150}}>
-        <FreeText text="al ganar: «alergia»" color="red" fontSize={48} rotate={3} font="display" />
+      <FlowItem inAt={9} enter="up" style={{left: 560, top: 490}}>
+        <PersonBase outfit="citizen" expression="neutral" height={210} skin="#d9a06b" flip />
       </FlowItem>
-      <FlowItem inAt={tAlcapone} enter="up" style={{left: 1120, top: 760}}>
-        <FreeText text="…«se desplaza» (Al Capone S. XXI)" color="red" fontSize={42} rotate={-2} />
+      <FlowItem inAt={f('campaña', 631.5)} enter="left" style={{left: 120, top: 150}}>
+        <FreeText text="en campaña: te abraza" color="green" fontSize={46} rotate={-3} font="display" />
+      </FlowItem>
+      <FlowItem inAt={f('mercados', 634)} enter="left" style={{left: 150, top: 770}}>
+        <FreeText text="…besos, fotos, caldo común" color="ink" fontSize={40} rotate={2} />
+      </FlowItem>
+      {/* DERECHA — al ganar: se desplaza (Al Capone) */}
+      <FlowItem inAt={0} enter="right" style={{left: 1080, top: 280}}>
+        <Idle amp={4} speed={26}>
+          <PersonBase outfit="suit" expression="smug" height={440} />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={tAlcapone - 24} enter="right" style={{left: 1360, top: 540}}>
+        <DoodleCar height={170} />
+      </FlowItem>
+      <FlowItem inAt={tAlergia} enter="right" style={{left: 1140, top: 150}}>
+        <FreeText text="al ganar: «alergia»" color="red" fontSize={46} rotate={3} font="display" />
+      </FlowItem>
+      <FlowItem inAt={tAlcapone} enter="up" style={{left: 1080, top: 770}}>
+        <FreeText text="…«se desplaza» (Al Capone)" color="red" fontSize={42} rotate={-2} />
       </FlowItem>
     </AbsoluteFill>
   );
@@ -120,8 +142,14 @@ export const S25: React.FC<P> = ({fromSec}) => {
   ];
   return (
     <AbsoluteFill>
-      {/* BASE desde frame 0: la orquesta (los músicos esperando) */}
-      <Hero src="25_orquesta.png" at={0} h={560} />
+      {/* BASE desde frame 0: la "orquesta" de cómplices (PersonBase) + director */}
+      {[0, 1, 2, 3].map((i) => (
+        <FlowItem key={`m${i}`} inAt={i * 3} enter="up" style={{left: 560 + i * 168, top: 300}}>
+          <Idle amp={4} speed={24 + i * 3}>
+            <PersonBase outfit="suit" expression={i === 1 ? 'smug' : 'neutral'} arm={i === 1 ? 'up' : 'down'} height={330} />
+          </Idle>
+        </FlowItem>
+      ))}
       <FlowItem inAt={4} outAt={tOrquesta + 8} enter="down" exit="up" style={{left: 470, top: 56}}>
         <FreeText text="un ecosistema de sabandijas…" color="ink" fontSize={48} rotate={-2} />
       </FlowItem>
@@ -287,18 +315,39 @@ export const S29: React.FC<P> = ({fromSec}) => {
 export const S31: React.FC<P> = ({fromSec}) => {
   const {fps} = useVideoConfig();
   const f = (kw: string, fb: number) => beatAt(kw, fb, fromSec, fps);
-  const tLampara = f('lámpara', 959);
+  const tHonesto = f('honesto', 956);
   return (
     <AbsoluteFill>
-      <FlowItem inAt={f('jurar', 934)} outAt={f('honesto', 956) - 6} enter="down" exit="up" style={{left: 480, top: 200}}>
-        <FreeText text="al jurar por la patria… mírale los dedos" color="ink" fontSize={50} rotate={-2} />
+      {/* BASE frame 0: jurar por la patria… calcular cuánto pesa la billetera nacional */}
+      <FlowItem inAt={0} outAt={tHonesto - 6} enter="scale" exit="up" style={{left: 700, top: 320}}>
+        <Idle amp={6} speed={20}>
+          <DoodleWallet height={210} />
+        </Idle>
       </FlowItem>
-      <Hero src="31_diogenes_lampara.png" at={f('honesto', 956)} h={620} />
-      <FlowItem inAt={f('honesto', 956) + 6} outAt={f('linterna', 964) - 2} enter="left" exit="fade" style={{left: 480, top: 110}}>
+      <FlowItem inAt={10} outAt={tHonesto - 6} enter="right" exit="up" style={{left: 1010, top: 360}}>
+        <DoodleCountry height={150} />
+      </FlowItem>
+      <FlowItem inAt={f('jurar', 934)} outAt={tHonesto - 6} enter="down" exit="fade" style={{left: 380, top: 140}}>
+        <FreeText text="al jurar por la patria… mírale los dedos" color="ink" fontSize={48} rotate={-2} />
+      </FlowItem>
+      <FlowItem inAt={f('pesa', 944)} outAt={tHonesto - 6} enter="up" exit="fade" style={{left: 560, top: 700}}>
+        <FreeText text="…ya calcula cuánto pesa la billetera nacional" color="red" fontSize={46} rotate={2} />
+      </FlowItem>
+
+      {/* Diógenes (SVG propio) busca un honesto */}
+      <FlowItem inAt={tHonesto} enter="scale" style={{left: 200, top: 230}}>
+        <Idle amp={4} speed={28}>
+          <Diogenes height={560} />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={tHonesto + 6} enter="down" style={{left: 560, top: 150}}>
         <FreeText text="Diógenes buscaba un hombre honesto…" color="ink" fontSize={48} rotate={-2} />
       </FlowItem>
-      <FlowItem inAt={f('linterna', 964)} enter="up" style={{left: 360, top: 790}}>
-        <FreeText text="…aquí: linterna, Excel, auditoría y detector de metales" color="red" fontSize={44} rotate={-2} />
+      <FlowItem inAt={f('linterna', 964)} enter="scale" style={{left: 1140, top: 420}}>
+        <DoodleDetector height={300} />
+      </FlowItem>
+      <FlowItem inAt={f('linterna', 964) + 2} enter="up" style={{left: 520, top: 790}}>
+        <FreeText text="…aquí: con linterna, Excel, auditoría y detector" color="red" fontSize={44} rotate={-2} />
       </FlowItem>
     </AbsoluteFill>
   );

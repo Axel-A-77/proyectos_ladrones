@@ -661,3 +661,19 @@ export const DoodleCalculator: React.FC<D> = ({height = 180, style}) =>
     </g>,
     style
   );
+
+// Detector de metales.
+export const DoodleDetector: React.FC<D> = ({height = 200, style}) =>
+  box(
+    height,
+    140 / 200,
+    '0 0 140 200',
+    <g strokeLinejoin="round" strokeLinecap="round">
+      <path d="M70 28 L70 150" stroke={INK} strokeWidth={9} />
+      <path d="M50 28 h40" stroke={INK} strokeWidth={9} />
+      <rect x={54} y={58} width={32} height={36} rx={5} fill="#5AA6D8" stroke={INK} strokeWidth={6} />
+      <ellipse cx={70} cy={168} rx={48} ry={17} fill="none" stroke={INK} strokeWidth={9} />
+      <ellipse cx={70} cy={168} rx={30} ry={9} fill="#cfcabd" stroke={INK} strokeWidth={4} />
+    </g>,
+    style
+  );

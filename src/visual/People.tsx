@@ -230,3 +230,51 @@ export const Auditor: React.FC<{height?: number; expression?: Expression; arm?: 
 export const Father: React.FC<{height?: number; expression?: Expression; arm?: ArmPose; flip?: boolean; style?: React.CSSProperties}> = (p) => (
   <PersonBase outfit="father" expression={p.expression ?? 'hopeful'} {...p} />
 );
+
+// Diógenes en el MISMO lenguaje (toga, barba, lámpara). Mantiene su identidad.
+export const Diogenes: React.FC<{height?: number; style?: React.CSSProperties}> = ({height = 360, style}) => {
+  const w = (height * 220) / 360;
+  const skin = '#E8B98A';
+  const robe = '#efe6cf';
+  const gray = '#cfcabd';
+  return (
+    <svg width={w} height={height} viewBox="0 0 220 360" style={style}>
+      <g strokeLinejoin="round" strokeLinecap="round">
+        <ellipse cx={110} cy={352} rx={64} ry={10} fill="rgba(21,18,13,0.12)" />
+        {/* piernas desnudas + sandalias */}
+        <path d="M94 296 L88 330" stroke={skin} strokeWidth={22} />
+        <path d="M126 296 L132 330" stroke={skin} strokeWidth={22} />
+        <path d="M72 334 h32 M116 334 h32" stroke={INK} strokeWidth={7} />
+        {/* brazo izquierdo */}
+        <path d="M74 198 C 58 222, 58 252, 62 278" fill="none" stroke={robe} strokeWidth={26} />
+        <circle cx={62} cy={282} r={12} fill={skin} stroke={INK} strokeWidth={5} />
+        {/* toga (A-line) */}
+        <path d="M58 300 L82 154 Q110 134 138 154 L162 300 Z" fill={robe} stroke={INK} strokeWidth={8} />
+        <path d="M110 150 L104 298 M88 170 L80 296 M132 170 L140 296" stroke="#d8cdb0" strokeWidth={4} fill="none" />
+        <path d="M82 158 Q120 178 150 152" fill="none" stroke="#d8cdb0" strokeWidth={6} />
+        {/* brazo derecho levantado con la lámpara */}
+        <path d="M150 182 C 176 170, 188 146, 182 122" fill="none" stroke={robe} strokeWidth={24} />
+        <circle cx={182} cy={120} r={12} fill={skin} stroke={INK} strokeWidth={5} />
+        {/* lámpara de aceite + llama */}
+        <path d="M166 102 q24 -10 40 4 q-4 14 -22 12 q-16 -2 -18 -16 Z" fill={COLORS.gold} stroke={INK} strokeWidth={5} />
+        <path d="M198 98 q12 -6 6 8" fill="none" stroke={INK} strokeWidth={4} />
+        <path d="M182 92 q3 -16 12 -3 q3 11 -5 13 q-9 -1 -7 -10 Z" fill={COLORS.red} stroke={INK} strokeWidth={3} />
+        {/* cuello + orejas + cabeza */}
+        <rect x={98} y={150} width={24} height={16} fill={skin} stroke={INK} strokeWidth={5} />
+        <circle cx={56} cy={92} r={10} fill={skin} stroke={INK} strokeWidth={5} />
+        <circle cx={164} cy={92} r={10} fill={skin} stroke={INK} strokeWidth={5} />
+        <ellipse cx={110} cy={88} rx={56} ry={58} fill={skin} stroke={INK} strokeWidth={7} />
+        {/* pelo gris a los lados (calvo arriba) */}
+        <path d="M56 84 C 56 52, 78 42, 96 48 C 78 56, 64 68, 60 88 Z" fill={gray} stroke={INK} strokeWidth={5} />
+        <path d="M164 84 C 164 52, 142 42, 124 48 C 142 56, 156 68, 160 88 Z" fill={gray} stroke={INK} strokeWidth={5} />
+        {/* ojos + cejas (buscando) */}
+        <circle cx={92} cy={84} r={6} fill={INK} />
+        <circle cx={130} cy={84} r={6} fill={INK} />
+        <path d="M80 72 q12 -6 22 -2 M120 70 q10 -6 22 2" fill="none" stroke={INK} strokeWidth={4} />
+        {/* barba gris grande */}
+        <path d="M60 100 Q66 154 90 172 Q110 188 130 172 Q154 154 160 100 Q138 124 110 126 Q82 124 60 100 Z" fill={gray} stroke={INK} strokeWidth={6} />
+        <path d="M98 116 q12 6 24 0" fill="none" stroke={INK} strokeWidth={4} />
+      </g>
+    </svg>
+  );
+};
