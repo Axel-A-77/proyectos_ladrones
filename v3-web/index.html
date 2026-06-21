@@ -4,24 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Los ladrones V3</title>
-  <link rel="stylesheet" href="./styles.css?v=4" />
+  <link rel="stylesheet" href="./styles-v5.css?v=5" />
 </head>
 <body>
   <main class="workspace">
     <section id="stage-wrap" class="stage-wrap">
       <div id="stage" class="stage">
-        <video id="presenter" preload="auto" playsinline></video>
-        <div id="video-shade" class="video-shade"></div>
-        <div id="fx-layer" class="fx-layer"></div>
-        <div id="scene-layer" class="scene-layer"></div>
-        <div id="hud-layer" class="hud-layer"></div>
+        <video id="presenter" class="presenter" preload="auto" playsinline></video>
+
+        <div id="art-frame" class="art-frame">
+          <img id="art-image" class="art-image" alt="Ilustración animada" />
+          <div id="art-title" class="art-title"></div>
+        </div>
+
+        <div id="father-overlay" class="father-overlay">
+          <div class="father-panel">
+            <img id="father-panel-image" alt="Ilustración de apoyo" />
+          </div>
+          <div id="lower-third" class="lower-third"></div>
+        </div>
+
+        <div id="scene-badge" class="scene-badge"></div>
+        <div id="focus-ring" class="focus-ring"></div>
+
         <div id="missing-video" class="missing-video" hidden>
-          <strong>No puedo cargar el video dentro del prototipo.</strong>
-          <span>Comprueba que papa_web.mp4 se reproduzca directamente en el navegador.</span>
+          <strong>No puedo cargar papa_web.mp4.</strong>
+          <span>Comprueba que se reproduzca directamente en el navegador.</span>
         </div>
       </div>
     </section>
-    <section id="controls" class="controls">
+
+    <section class="controls">
       <div class="control-row">
         <button id="play" type="button">Reproducir</button>
         <button id="restart" type="button">Reiniciar</button>
@@ -29,16 +42,15 @@
         <button id="record" type="button" class="primary">Grabar 2 minutos</button>
         <span id="timecode" class="timecode">00:00.0 / 02:00.0</span>
       </div>
-      <input id="seek" type="range" min="0" max="120" step="0.01" value="0" />
+      <input id="seek" class="seek" type="range" min="0" max="120" step="0.01" value="0" />
       <div class="legend">
         <span>Espacio: reproducir o pausar</span>
         <span>F: pantalla completa</span>
-        <span>Esc: salir del modo grabacion</span>
+        <span>Esc: salir del modo grabación</span>
       </div>
     </section>
   </main>
-  <script type="module" src="./video-recovery.js?v=4"></script>
-  <script type="module" src="./app.js?v=4"></script>
-  <script type="module" src="./board-enhancement.js?v=4"></script>
+
+  <script type="module" src="./app-v5.js?v=5"></script>
 </body>
 </html>
