@@ -662,6 +662,51 @@ export const DoodleCalculator: React.FC<D> = ({height = 180, style}) =>
     style
   );
 
+// Televisor (lo que te roban).
+export const DoodleTv: React.FC<D> = ({height = 160, style}) =>
+  box(
+    height,
+    200 / 160,
+    '0 0 200 160',
+    <g strokeLinejoin="round" strokeLinecap="round">
+      <rect x={20} y={16} width={160} height={104} rx={10} fill="#2b2f36" stroke={INK} strokeWidth={7} />
+      <rect x={34} y={30} width={132} height={76} rx={4} fill="#5AA6D8" stroke={INK} strokeWidth={4} />
+      <path d="M80 120 L70 144 M120 120 L130 144" stroke={INK} strokeWidth={7} />
+      <path d="M56 146 H144" stroke={INK} strokeWidth={7} />
+    </g>,
+    style
+  );
+
+// Control remoto (lo que sí te deja).
+export const DoodleRemote: React.FC<D> = ({height = 170, style}) =>
+  box(
+    height,
+    70 / 170,
+    '0 0 70 170',
+    <g strokeLinejoin="round" strokeLinecap="round">
+      <rect x={14} y={10} width={42} height={150} rx={14} fill="#3a3f4a" stroke={INK} strokeWidth={6} />
+      <rect x={22} y={20} width={26} height={20} rx={3} fill="#9DCD67" stroke={INK} strokeWidth={3} />
+      {[58, 84, 110, 136].map((y) => (
+        <circle key={y} cx={35} cy={y} r={6} fill={CREAM} stroke={INK} strokeWidth={3} />
+      ))}
+    </g>,
+    style
+  );
+
+// Sobre (transferencias, audios en clave).
+export const DoodleEnvelope: React.FC<D> = ({height = 130, style}) =>
+  box(
+    height,
+    180 / 130,
+    '0 0 180 130',
+    <g strokeLinejoin="round" strokeLinecap="round">
+      <rect x={16} y={20} width={148} height={94} rx={6} fill={CREAM} stroke={INK} strokeWidth={7} />
+      <path d="M16 26 L90 76 L164 26" fill="none" stroke={INK} strokeWidth={6} />
+      <circle cx={148} cy={96} r={14} fill={RED} stroke={INK} strokeWidth={5} />
+    </g>,
+    style
+  );
+
 // Detector de metales.
 export const DoodleDetector: React.FC<D> = ({height = 200, style}) =>
   box(

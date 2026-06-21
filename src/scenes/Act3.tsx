@@ -4,7 +4,7 @@ import {COLORS} from '../theme';
 import {RoleTitle, PhraseSwap, ill} from '../effects/kit';
 import {FlowItem, Idle, BubbleBox, FreeText} from '../effects/flow';
 import {PersonBase, Outfit, Diogenes} from '../visual/People';
-import {DoodleHospital, DoodleCar, DoodleWallet, DoodleCountry, DoodleDetector} from './doodles';
+import {DoodleHospital, DoodleCar, DoodleWallet, DoodleCountry, DoodleDetector, DoodleTv, DoodleRemote, DoodleEnvelope} from './doodles';
 import {beatAt} from './util';
 
 type P = {durationInFrames: number; fromSec: number};
@@ -71,15 +71,34 @@ export const S22: React.FC<P> = ({fromSec}) => {
   const tTele = f('televisor', 677);
   return (
     <AbsoluteFill>
-      <FlowItem inAt={f('defensores', 665)} outAt={tTele - 6} enter="down" exit="up" style={{left: 480, top: 220}}>
-        <FreeText text="«todos roban… pero hace obras»" color="ink" fontSize={54} rotate={-2} />
+      <FlowItem inAt={f('defensores', 665)} outAt={tTele - 6} enter="down" exit="up" style={{left: 480, top: 70}}>
+        <FreeText text="«todos roban… pero hace obras»" color="ink" fontSize={52} rotate={-2} />
       </FlowItem>
-      <Hero src="22_ladron_control_remoto.png" at={tTele} h={640} />
-      <FlowItem inAt={tTele + 6} outAt={f('bondad', 680) + 4} enter="left" exit="fade" style={{left: 520, top: 120}}>
-        <FreeText text="te roba el televisor…" color="ink" fontSize={50} rotate={-2} />
+      {/* BASE frame 0: ciudadano (izq) y ladrón (der) */}
+      <FlowItem inAt={0} enter="left" style={{left: 200, top: 330}}>
+        <Idle amp={4} speed={30}>
+          <PersonBase outfit="citizen" expression="worried" height={380} />
+        </Idle>
       </FlowItem>
-      <FlowItem inAt={f('bondad', 680)} enter="scale" style={{left: 600, top: 790}}>
-        <FreeText text="…pero te deja el control. ¡qué bondad!" color="red" fontSize={48} rotate={2} />
+      <FlowItem inAt={4} enter="right" style={{left: 1060, top: 300}}>
+        <Idle amp={4} speed={26}>
+          <PersonBase outfit="suit" expression="smug" height={420} flip />
+        </Idle>
+      </FlowItem>
+      {/* el ladrón se lleva el TV; al ciudadano le deja el control */}
+      <FlowItem inAt={tTele} enter="up" style={{left: 1150, top: 440}}>
+        <Idle amp={5} speed={20}>
+          <DoodleTv height={160} />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={f('bondad', 680)} enter="up" style={{left: 430, top: 520}}>
+        <DoodleRemote height={150} />
+      </FlowItem>
+      <FlowItem inAt={tTele + 6} outAt={f('bondad', 680) + 4} enter="down" exit="fade" style={{left: 540, top: 160}}>
+        <FreeText text="te roba el televisor…" color="ink" fontSize={48} rotate={-2} />
+      </FlowItem>
+      <FlowItem inAt={f('bondad', 680)} enter="up" style={{left: 120, top: 770}}>
+        <FreeText text="…pero te deja el control. ¡qué bondad!" color="red" fontSize={44} rotate={2} />
       </FlowItem>
     </AbsoluteFill>
   );
@@ -92,14 +111,29 @@ export const S23: React.FC<P> = ({fromSec}) => {
   const tEspias = f('espías', 697);
   return (
     <AbsoluteFill>
-      <FlowItem inAt={f('pruebas', 684)} outAt={tEspias + 60} enter="scale" style={{left: 560, top: 150}}>
-        <FreeText text="«no hay pruebas»…" color="ink" fontSize={54} rotate={-2} />
+      <FlowItem inAt={f('pruebas', 684)} enter="scale" style={{left: 560, top: 80}}>
+        <FreeText text="«no hay pruebas»…" color="ink" fontSize={52} rotate={-2} />
       </FlowItem>
-      <Hero src="23_espias_clave.png" at={f('consultorías', 689.5)} h={620} />
-      <FlowItem inAt={f('consultorías', 689.5) + 6} outAt={tEspias - 2} enter="left" exit="fade" style={{left: 300, top: 760}}>
+      {/* BASE frame 0: dos espías susurrando (PersonBase con lentes oscuros) */}
+      <FlowItem inAt={0} enter="left" style={{left: 360, top: 300}}>
+        <Idle amp={4} speed={28}>
+          <PersonBase outfit="suit" expression="smug" shades height={420} />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={4} enter="right" style={{left: 820, top: 300}}>
+        <Idle amp={4} speed={25}>
+          <PersonBase outfit="suit" expression="neutral" shades height={420} flip />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={f('consultorías', 689.5)} enter="up" style={{left: 660, top: 560}}>
+        <Idle amp={5} speed={20}>
+          <DoodleEnvelope height={150} />
+        </Idle>
+      </FlowItem>
+      <FlowItem inAt={f('consultorías', 689.5) + 6} outAt={tEspias - 2} enter="up" exit="fade" style={{left: 300, top: 780}}>
         <FreeText text="…solo consultorías y recibos ambiguos" color="ink" fontSize={44} rotate={2} />
       </FlowItem>
-      <FlowItem inAt={tEspias} enter="right" style={{left: 1180, top: 790}}>
+      <FlowItem inAt={tEspias} enter="up" style={{left: 560, top: 780}}>
         <FreeText text="…hablan en clave, como espías" color="red" fontSize={46} rotate={-2} />
       </FlowItem>
     </AbsoluteFill>

@@ -137,9 +137,10 @@ export const PersonBase: React.FC<{
   arm?: ArmPose;
   skin?: string;
   build?: 'normal' | 'thin' | 'fat';
+  shades?: boolean;
   flip?: boolean;
   style?: React.CSSProperties;
-}> = ({outfit = 'citizen', expression = 'neutral', height = 320, arm = 'down', skin = '#E8B98A', build = 'normal', flip = false, style}) => {
+}> = ({outfit = 'citizen', expression = 'neutral', height = 320, arm = 'down', skin = '#E8B98A', build = 'normal', shades = false, flip = false, style}) => {
   const c = OUTFITS[outfit];
   const w = (height * 220) / 360;
 
@@ -213,6 +214,13 @@ export const PersonBase: React.FC<{
             <circle cx={132} cy={90} r={17} />
             <path d="M105 90 h10" />
             <path d="M71 86 l-14 -4" />
+          </g>
+        )}
+        {shades && (
+          <g stroke={INK} strokeWidth={4}>
+            <ellipse cx={88} cy={90} rx={18} ry={13} fill={INK} />
+            <ellipse cx={132} cy={90} rx={18} ry={13} fill={INK} />
+            <path d="M106 88 h8" />
           </g>
         )}
       </g>
