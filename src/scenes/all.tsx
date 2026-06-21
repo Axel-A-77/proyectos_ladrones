@@ -3,10 +3,10 @@ import {TitleScene} from './TitleScene';
 import {IntroReflectionScene} from './IntroReflectionScene';
 import {EufemismosScene} from './EufemismosScene';
 import {AlcaldeScene} from './AlcaldeScene';
-import {GobernadorScene} from './GobernadorScene';
+import {GobernadorInfographic} from './GobernadorInfographic';
 import {CongresistaScene} from './CongresistaScene';
 import {PresidenteScene} from './PresidenteScene';
-import {MagiaScene} from './MagiaScene';
+import {MagiaInfographic} from './MagiaInfographic';
 import {PuebloAuditorScene} from './PuebloAuditorScene';
 import {S19, S20} from './Act2';
 import {S21, S22, S23, S24, S26, S28, S29, S31} from './Act3';
@@ -31,8 +31,8 @@ export const SCENES: Record<string, React.FC<SceneProps>> = {
   '05_presupuesto_cuchara': S05,
   '06_abrazo_roba_billetera': S06,
   alcalde: AlcaldeScene,
-  gobernador: GobernadorScene,
-  '13_magia_negra': MagiaScene,
+  gobernador: GobernadorInfographic,
+  '13_magia_negra': MagiaInfographic,
   congresista: CongresistaScene,
   presidente: PresidenteScene,
   '18_eufemismos': EufemismosScene,
