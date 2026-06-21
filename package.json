@@ -1,0 +1,33 @@
+{
+  "name": "proyecto-ladrones",
+  "version": "1.0.0",
+  "description": "Video doodle 2D — Los ladrones de cuello y corbata",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio",
+    "studio": "remotion studio",
+    "captions": "node scripts/build-captions.mjs",
+    "probe": "remotion ffprobe assets/video/papa.mp4",
+    "render": "remotion render LosLadronesDemo out/demo.mp4",
+    "render:full": "remotion render LosLadrones out/ladrones.mp4",
+    "upgrade": "remotion upgrade"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@remotion/cli": "^4.0.481",
+    "@remotion/google-fonts": "^4.0.481",
+    "@remotion/transitions": "^4.0.481",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.481"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@xenova/transformers": "^2.17.2",
+    "pngjs": "^7.0.0",
+    "typescript": "^6.0.3",
+    "wavefile": "^11.0.0"
+  }
+}

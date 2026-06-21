@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo de edición — Los ladrones de cuello y corbata</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+  :root{
+    --paper:#FBF8F1; --ink:#15120D; --red:#E0392B; --gold:#F2B705;
+    --dark:#17140E; --green:#1F9E5A; --muted:#9A917F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:#0d0c0a;
+    font-family:'Trebuchet MS','Segoe UI',system-ui,sans-serif;
+    color:var(--ink);
+    display:flex; flex-direction:column; align-items:center;
+    min-height:100vh; padding:24px 16px; gap:16px;
+  }
+  .head{color:#e9e4d8; text-align:center; max-width:960px;}
+  .head h1{font-size:18px; font-weight:800; letter-spacing:.2px;}
+  .head p{font-size:13px; opacity:.6; margin-top:4px;}
+
+  .frame{width:100%; max-width:960px;}
+  .wrap{
+    position:relative; width:100%; overflow:hidden;
+    border-radius:14px; background:var(--paper);
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+  }
+  .stage{
+    position:absolute; top:0; left:0; width:1280px; height:720px;
+    transform-origin:top left; background:var(--paper);
+  }
+  .scene{position:absolute; inset:0; opacity:0;}
+  .el{position:absolute;}
+
+  /* ---- Scene 1: título ---- */
+  #s1 .title{
+    left:0; right:0; top:240px; text-align:center;
+    font-weight:800; color:var(--ink); line-height:1.04;
+  }
+  #s1 .l1{font-size:64px; letter-spacing:1px;}
+  #s1 .l2{font-size:78px; letter-spacing:1px;}
+  #s1 .w{display:inline-block;}
+  #s1 .w.r{color:var(--red);}
+  #s1 .ulwrap{left:50%; top:438px; width:760px; margin-left:-380px; height:60px;}
+
+  /* ---- generic labels / captions ---- */
+  .plabel{
+    font-weight:800; color:var(--ink);
+    background:var(--gold); padding:6px 14px; border-radius:6px;
+    border:3px solid var(--ink); font-size:26px;
+  }
+  .role{
+    font-weight:800; font-size:46px; color:#fff; letter-spacing:1px;
+    border-bottom:5px solid var(--gold); padding-bottom:6px;
+  }
+  .bubble{
+    background:#fff; border:3px solid var(--ink); border-radius:18px;
+    padding:14px 18px; font-weight:700; font-size:26px; color:var(--ink);
+    max-width:360px; position:absolute;
+  }
+  .bubble:after{
+    content:''; position:absolute; left:40px; bottom:-18px;
+    border-width:18px 16px 0 0; border-style:solid;
+    border-color:var(--ink) transparent transparent transparent;
+  }
+  .bubble:before{
+    content:''; position:absolute; left:42px; bottom:-12px; z-index:1;
+    border-width:13px 11px 0 0; border-style:solid;
+    border-color:#fff transparent transparent transparent;
+  }
+  .note{font-size:18px; color:#9a917f; font-style:italic;}
+
+  /* ---- Scene 4: eufemismos ---- */
+  .euf{font-weight:800; position:absolute;}
+  #robe{left:230px; top:250px; font-size:58px; color:var(--ink);}
+  #fra{left:360px; top:420px; font-size:50px; color:var(--green); max-width:760px;}
+  .tag{font-size:40px; vertical-align:middle;}
+
+  /* ---- end card ---- */
+  #s5 .eyebrow{left:0; right:0; top:280px; text-align:center; font-size:22px; letter-spacing:5px; color:var(--red); font-weight:800;}
+  #s5 .big{left:0; right:0; top:316px; text-align:center; font-size:54px; font-weight:800; color:var(--ink);}
+  #s5 .hint{left:0; right:0; top:404px; text-align:center; font-size:22px; color:#9a917f;}
+
+  /* ---- subtitle ---- */
+  .subtitle{
+    position:absolute; left:80px; right:80px; bottom:46px;
+    text-align:center; opacity:0; transition:opacity .22s ease;
+  }
+  .subtitle span{
+    display:inline; background:rgba(18,15,10,.84); color:#fff;
+    font-weight:700; font-size:30px; line-height:1.5;
+    padding:6px 14px; border-radius:8px;
+    box-decoration-break:clone; -webkit-box-decoration-break:clone;
+  }
+
+  /* ---- controls ---- */
+  .controls{display:flex; align-items:center; gap:14px; width:100%; max-width:960px;}
+  button{
+    font-family:inherit; font-weight:800; font-size:15px; cursor:pointer;
+    background:var(--red); color:#fff; border:none; padding:11px 18px;
+    border-radius:10px; white-space:nowrap; transition:transform .1s ease, filter .15s ease;
+  }
+  button:hover{filter:brightness(1.08);}
+  button:active{transform:translateY(1px);}
+  button:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+  .bar{flex:1; height:8px; background:#2a2823; border-radius:999px; overflow:hidden;}
+  .bar-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--gold),var(--red));}
+
+  /* svg helpers */
+  .draw{fill:none; stroke:var(--red); stroke-width:7; stroke-linecap:round; stroke-linejoin:round;}
+  .ink{stroke:var(--ink); stroke-width:6; fill:none; stroke-linecap:round; stroke-linejoin:round;}
+  .fillw{fill:#fff;}
+</style>
+</head>
+<body>
+  <div class="head">
+    <h1>Demo de edición — “Los ladrones de cuello y corbata”</h1>
+    <p>Hecho solo con HTML + GSAP (sin 3D). Mira las transiciones, los subtítulos sincronizados y los elementos que aparecen.</p>
+  </div>
+
+  <div class="frame">
+    <div class="wrap" id="wrap">
+      <div class="stage" id="stage">
+
+        <!-- ============ SCENE 1: TÍTULO ============ -->
+        <div class="scene" id="s1">
+          <div class="el title">
+            <div class="l1"><span class="w">LOS</span> <span class="w">LADRONES</span> <span class="w">DE</span></div>
+            <div class="l2"><span class="w r">CUELLO</span> <span class="w">Y</span> <span class="w r">CORBATA</span></div>
+          </div>
+          <div class="el ulwrap">
+            <svg viewBox="0 0 760 60" width="760" height="60">
+              <path class="draw" d="M10,34 C140,16 300,12 420,30 C540,48 680,46 750,26"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- ============ SCENE 2: LA ENFERMEDAD ============ -->
+        <div class="scene" id="s2">
+          <!-- puerta del PODER -->
+          <div class="el plabel" id="doorlabel" style="left:150px; top:206px;">PODER</div>
+          <div class="el" id="door" style="left:150px; top:260px;">
+            <svg viewBox="0 0 150 230" width="150" height="230">
+              <rect class="ink fillw" x="14" y="10" width="122" height="210" rx="6"/>
+              <rect class="ink" x="30" y="28" width="90" height="184" rx="4" fill="#F3E7C6"/>
+              <circle cx="104" cy="120" r="7" fill="#15120D"/>
+            </svg>
+          </div>
+          <!-- figura -->
+          <div class="el" id="fig" style="left:300px; top:360px;">
+            <svg viewBox="0 0 80 150" width="80" height="150">
+              <circle class="ink fillw" cx="40" cy="26" r="20"/>
+              <path class="ink" d="M40,46 L40,104 M40,60 L16,86 M40,60 L64,86 M40,104 L22,144 M40,104 L58,144" />
+            </svg>
+          </div>
+          <!-- sillón -->
+          <div class="el" id="chair" style="left:520px; top:330px;">
+            <svg viewBox="0 0 230 220" width="230" height="220">
+              <rect class="ink" x="20" y="40" width="190" height="120" rx="20" fill="#C0532E"/>
+              <rect class="ink" x="6" y="70" width="44" height="110" rx="16" fill="#A8451F"/>
+              <rect class="ink" x="180" y="70" width="44" height="110" rx="16" fill="#A8451F"/>
+              <rect class="ink" x="40" y="150" width="20" height="56" fill="#7d3417"/>
+              <rect class="ink" x="170" y="150" width="20" height="56" fill="#7d3417"/>
+            </svg>
+          </div>
+          <!-- país = billetera -->
+          <div class="el" id="country" style="left:838px; top:356px;">
+            <svg viewBox="0 0 110 110" width="110" height="110">
+              <path class="ink" d="M14,40 L40,18 L70,30 L96,20 L92,86 L60,96 L30,82 L14,90 Z" fill="#7FB069"/>
+            </svg>
+          </div>
+          <div class="el" id="eq" style="left:958px; top:382px; font-size:54px; font-weight:800; color:#15120D;">=</div>
+          <div class="el" id="wallet" style="left:1020px; top:350px;">
+            <svg viewBox="0 0 120 100" width="120" height="100">
+              <rect class="ink" x="10" y="20" width="100" height="70" rx="12" fill="#7d4a2e"/>
+              <rect class="ink" x="10" y="20" width="100" height="24" rx="12" fill="#67492f"/>
+              <rect class="ink" x="64" y="44" width="46" height="34" rx="6" fill="#6b3f26"/>
+              <circle cx="86" cy="61" r="7" fill="var(--gold)"/>
+              <rect x="30" y="6" width="56" height="26" rx="4" fill="#cfe8b8" stroke="#15120D" stroke-width="4"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- ============ SCENE 3: EL GOBERNADOR (oscuro) ============ -->
+        <div class="scene" id="s3">
+          <div class="el role" id="role" style="left:110px; top:110px;">EL GOBERNADOR</div>
+          <!-- personaje placeholder -->
+          <div class="el" id="gov" style="left:340px; top:220px;">
+            <svg viewBox="0 0 240 430" width="240" height="430">
+              <path class="ink" d="M70,150 L40,300 L80,420 L120,300 L160,420 L200,300 L170,150 Z" fill="#23314d"/>
+              <path class="ink" d="M120,150 L92,300" stroke="#cf2a2a" stroke-width="14"/>
+              <rect x="100" y="92" width="40" height="60" fill="#23314d" stroke="#15120D" stroke-width="6"/>
+              <circle class="ink" cx="120" cy="60" r="42" fill="#E8B98A"/>
+              <path class="ink" d="M82,52 C92,18 150,18 160,54 C150,40 92,40 82,52 Z" fill="#2b2b2b"/>
+              <path class="ink" d="M104,70 q16,12 32,0" fill="none" stroke-width="5"/>
+            </svg>
+          </div>
+          <div class="el bubble" id="bub" style="left:600px; top:150px;">“Trabajando por la región”</div>
+          <!-- puente = dos cuentas -->
+          <div class="el" id="bridge" style="left:690px; top:430px;">
+            <svg viewBox="0 0 420 180" width="420" height="180">
+              <circle class="ink" cx="50" cy="120" r="46" fill="#1d2740"/>
+              <circle class="ink" cx="370" cy="120" r="46" fill="#1d2740"/>
+              <text x="50" y="134" text-anchor="middle" font-size="46" font-weight="800" fill="var(--gold)">$</text>
+              <text x="370" y="134" text-anchor="middle" font-size="46" font-weight="800" fill="var(--gold)">$</text>
+              <path class="draw" d="M50,96 C140,8 280,8 370,96"/>
+            </svg>
+          </div>
+          <div class="el note" id="govnote" style="left:340px; top:650px; color:#b9b09c;">(aquí va tu PNG del personaje)</div>
+        </div>
+
+        <!-- ============ SCENE 4: EUFEMISMOS ============ -->
+        <div class="scene" id="s4">
+          <div class="euf" id="robe"><span class="tag">❌</span> «robé»</div>
+          <div class="euf" id="fra"><span class="tag">✅</span> «hubo errores administrativos»</div>
+          <svg class="el" id="ovl" style="left:0; top:0;" viewBox="0 0 1280 720" width="1280" height="720">
+            <path class="draw" id="strike" d="M250,300 L520,288" stroke-width="9"/>
+            <path class="draw" id="arrow" d="M360,330 C380,400 420,410 440,418" />
+            <path class="draw" id="arrowhead" d="M418,398 L444,420 L416,432" stroke-width="9"/>
+          </svg>
+        </div>
+
+        <!-- ============ SCENE 5: END ============ -->
+        <div class="scene" id="s5">
+          <div class="el eyebrow">D E M O</div>
+          <div class="el big">Hecho solo con HTML + GSAP</div>
+          <div class="el hint">↻ pulsa “Repetir” para verlo de nuevo</div>
+        </div>
+
+        <!-- subtitle -->
+        <div class="subtitle" id="sub"><span></span></div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="play">▶ Reproducir</button>
+    <div class="bar"><div class="bar-fill" id="fill"></div></div>
+  </div>
+
+<script>
+(function(){
+  const stage = document.getElementById('stage');
+  const wrap  = document.getElementById('wrap');
+  const subEl = document.getElementById('sub');
+  const subTx = subEl.querySelector('span');
+  const fill  = document.getElementById('fill');
+  const btn   = document.getElementById('play');
+  const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const D = (s)=> RM ? 0.001 : s;
+
+  // Fit the 1280x720 stage into the responsive wrapper
+  function fit(){
+    const scale = wrap.clientWidth / 1280;
+    stage.style.transform = 'scale(' + scale + ')';
+    wrap.style.height = (720 * scale) + 'px';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  // Prepare draw-on paths
+  document.querySelectorAll('.draw').forEach(function(p){
+    var L = p.getTotalLength();
+    p.style.strokeDasharray = L;
+    p.style.strokeDashoffset = L;
+  });
+
+  function setSub(t){
+    if(!t){ subEl.style.opacity = 0; return; }
+    subTx.textContent = t;
+    subEl.style.opacity = 1;
+  }
+  function bg(color){ return gsap.to(stage, {backgroundColor:color, duration:D(0.5)}); }
+
+  const tl = gsap.timeline({
+    paused:true,
+    onUpdate:function(){ fill.style.width = (tl.progress()*100) + '%'; },
+    onComplete:function(){ btn.textContent = '↻ Repetir'; }
+  });
+
+  // ============ SCENE 1 ============
+  tl.call(setSub, ['Buenos días, amigos míos…'])
+    .set('#s1', {opacity:1})
+    .from('#s1 .w', {y:46, opacity:0, duration:D(0.5), stagger:D(0.06), ease:'back.out(1.7)'})
+    .call(setSub, ['…hoy vengo a hablar de los ladrones de cuello y corbata.'], '+=0.05')
+    .to('#s1 .ulwrap .draw', {strokeDashoffset:0, duration:D(0.7), ease:'power2.out'}, '-=0.1')
+    .to('#s1', {opacity:0, duration:D(0.4)}, '+=1.1');
+
+  // ============ SCENE 2 ============
+  tl.call(setSub, ['Una enfermedad que entra por las puertas del poder…'])
+    .set('#s2', {opacity:1}, '<')
+    .from('#door, #doorlabel', {scale:0.5, opacity:0, transformOrigin:'center bottom', duration:D(0.5), ease:'back.out(1.6)'})
+    .from('#fig', {x:-160, opacity:0, duration:D(0.6), ease:'power2.out'}, '+=0.1')
+    .to('#fig', {x:120, opacity:0, duration:D(0.5), ease:'power1.in'}, '+=0.15')
+    .call(setSub, ['…se sienta en el sillón principal…'])
+    .from('#chair', {scale:0.5, opacity:0, transformOrigin:'center bottom', duration:D(0.5), ease:'back.out(1.6)'}, '-=0.2')
+    .call(setSub, ['…y termina creyendo que el país es su billetera.'], '+=0.2')
+    .from('#country', {scale:0.4, opacity:0, transformOrigin:'center center', duration:D(0.4), ease:'back.out(1.7)'})
+    .from('#eq', {opacity:0, duration:D(0.25)}, '-=0.05')
+    .from('#wallet', {scale:0.4, opacity:0, transformOrigin:'center center', duration:D(0.45), ease:'back.out(1.8)'}, '-=0.05')
+    .to('#wallet', {y:'-=8', duration:D(0.7), ease:'sine.inOut', repeat:1, yoyo:true})
+    .to('#s2', {opacity:0, duration:D(0.4)}, '+=0.4');
+
+  // ============ SCENE 3 (tone shift to dark) ============
+  tl.to(stage, {backgroundColor:'#17140E', duration:D(0.5)}, '-=0.4')
+    .call(setSub, ['El gobernador no juega en cancha de barrio…'])
+    .set('#s3', {opacity:1})
+    .from('#role', {x:-80, opacity:0, duration:D(0.5), ease:'power3.out'})
+    .from('#gov', {x:-60, opacity:0, duration:D(0.55), ease:'back.out(1.5)'}, '-=0.25')
+    .from('#bub', {scale:0.4, opacity:0, transformOrigin:'left bottom', duration:D(0.45), ease:'back.out(1.8)'}, '-=0.1')
+    .call(setSub, ['…el puente no une dos pueblos, sino dos cuentas bancarias.'], '+=0.3')
+    .from('#bridge circle, #bridge text', {scale:0.4, opacity:0, transformOrigin:'center center', duration:D(0.4), stagger:D(0.08), ease:'back.out(1.7)'})
+    .to('#bridge .draw', {strokeDashoffset:0, duration:D(0.7), ease:'power2.inOut'}, '-=0.1')
+    .from('#govnote', {opacity:0, duration:D(0.4)}, '-=0.2')
+    .to('#s3', {opacity:0, duration:D(0.4)}, '+=0.9');
+
+  // ============ SCENE 4 (back to paper) ============
+  tl.to(stage, {backgroundColor:'#FBF8F1', duration:D(0.5)}, '-=0.4')
+    .call(setSub, ['Lo más admirable es su capacidad lingüística:'])
+    .set('#s4', {opacity:1})
+    .from('#robe', {scale:0.5, opacity:0, transformOrigin:'left center', duration:D(0.45), ease:'back.out(1.7)'})
+    .to('#strike', {strokeDashoffset:0, duration:D(0.4), ease:'power2.out'}, '+=0.3')
+    .call(setSub, ["nunca dice “robé”… dice “hubo errores administrativos”."])
+    .to('#arrow', {strokeDashoffset:0, duration:D(0.45), ease:'power2.out'}, '+=0.1')
+    .to('#arrowhead', {strokeDashoffset:0, duration:D(0.2), ease:'power2.out'}, '-=0.05')
+    .from('#fra', {scale:0.5, opacity:0, transformOrigin:'left center', duration:D(0.5), ease:'back.out(1.6)'}, '-=0.1')
+    .to('#s4', {opacity:0, duration:D(0.4)}, '+=1.2');
+
+  // ============ SCENE 5 ============
+  tl.call(setSub, [''])
+    .set('#s5', {opacity:1}, '<')
+    .from('#s5 .eyebrow', {y:20, opacity:0, duration:D(0.4)})
+    .from('#s5 .big', {y:24, opacity:0, duration:D(0.5), ease:'back.out(1.5)'}, '-=0.2')
+    .from('#s5 .hint', {opacity:0, duration:D(0.4)}, '-=0.1')
+    .to({}, {duration:0.6});
+
+  function playFromStart(){
+    btn.textContent = '↻ Repetir';
+    setSub('');
+    tl.restart();
+  }
+  btn.addEventListener('click', playFromStart);
+
+  // autoplay once shortly after load
+  setTimeout(function(){ tl.play(0); }, 600);
+})();
+</script>
+</body>
+</html>
