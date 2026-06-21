@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 900">
+  <defs><filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="10" dy="12" stdDeviation="7" flood-opacity=".22"/></filter></defs>
+  <rect width="1800" height="900" fill="#f4c95d"/>
+  <text x="900" y="84" text-anchor="middle" font-family="Arial" font-size="66" font-weight="900" fill="#17130f">SILENCIO = IMPUNIDAD</text>
+  <g filter="url(#sh)" stroke="#17130f" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(90 150)">
+      <circle cx="260" cy="160" r="118" fill="#fff" stroke-width="14"/>
+      <path d="M174 132 Q224 87 266 124 M280 117 Q329 76 366 130" fill="none" stroke-width="12"/>
+      <circle cx="225" cy="160" r="14" fill="#17130f" stroke="none"/><circle cx="315" cy="158" r="14" fill="#17130f" stroke="none"/>
+      <path d="M205 220 Q270 286 342 205" fill="none" stroke-width="12"/>
+      <path d="M150 305 Q260 235 370 305 L410 610 Q260 685 110 610 Z" fill="#303944" stroke-width="15"/>
+      <path d="M238 315 L260 365 L286 315" fill="#e84a3c" stroke-width="8"/>
+      <path d="M125 365 Q35 410 60 545" fill="none" stroke-width="30"/>
+      <path d="M395 365 Q500 390 500 520" fill="none" stroke-width="30"/>
+      <circle cx="62" cy="545" r="34" fill="#fff" stroke-width="11"/><circle cx="500" cy="520" r="34" fill="#fff" stroke-width="11"/>
+      <rect x="65" y="438" width="150" height="76" rx="12" fill="#9ccd55" stroke-width="9"/>
+      <text x="140" y="491" text-anchor="middle" font-family="Arial" font-size="45" font-weight="900" fill="#17130f" stroke="none">$</text>
+      <path d="M195 610 L175 805 M330 610 L350 805" stroke-width="28"/>
+      <path d="M130 825 Q180 785 225 825 M305 825 Q355 785 405 825" fill="#17130f" stroke-width="9"/>
+    </g>
+    <g transform="translate(690 185)">
+      <circle cx="250" cy="160" r="110" fill="#fff" stroke-width="13"/>
+      <circle cx="215" cy="150" r="12" fill="#17130f" stroke="none"/><circle cx="285" cy="150" r="12" fill="#17130f" stroke="none"/>
+      <path d="M172 180 Q250 225 328 180" fill="none" stroke-width="10"/>
+      <rect x="135" y="168" width="230" height="34" rx="13" fill="#e84a3c" stroke-width="9" transform="rotate(-5 250 185)"/>
+      <path d="M128 365 Q250 245 372 365 L348 650 Q250 710 152 650 Z" fill="#59a9d8" stroke-width="14"/>
+      <path d="M120 405 Q50 455 48 585 M380 405 Q450 455 452 585" fill="none" stroke-width="28"/>
+      <circle cx="48" cy="585" r="32" fill="#fff" stroke-width="10"/><circle cx="452" cy="585" r="32" fill="#fff" stroke-width="10"/>
+      <path d="M190 650 L178 805 M310 650 L322 805" stroke-width="27"/>
+      <path d="M135 825 Q180 790 225 825 M278 825 Q325 790 370 825" fill="#17130f" stroke-width="9"/>
+      <text x="250" y="742" text-anchor="middle" font-family="Arial" font-size="38" font-weight="900" fill="#17130f" stroke="none">EL PUEBLO CALLA</text>
+    </g>
+    <g transform="translate(1260 230) rotate(-4)">
+      <rect width="440" height="245" rx="30" fill="#fff8e8" stroke="#e84a3c" stroke-width="14"/>
+      <text x="220" y="115" text-anchor="middle" font-family="Arial" font-size="58" font-weight="900" fill="#e84a3c" stroke="none">IMPUNIDAD</text>
+      <path d="M70 165 H370" stroke="#e84a3c" stroke-width="12"/>
+      <text x="220" y="215" text-anchor="middle" font-family="Arial" font-size="28" font-weight="900" fill="#17130f" stroke="none">EL PREMIO DEL SILENCIO</text>
+    </g>
+    <path d="M1180 470 C1240 430 1270 410 1320 390" fill="none" stroke="#e84a3c" stroke-width="14"/>
+    <path d="M1304 372 L1335 390 L1308 412" fill="#e84a3c" stroke="#e84a3c" stroke-width="6"/>
+  </g>
+</svg>
