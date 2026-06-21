@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Los ladrones V3</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="workspace">
+    <section id="stage-wrap" class="stage-wrap">
+      <div id="stage" class="stage">
+        <video id="presenter" preload="auto" playsinline>
+          <source src="/assets/video/papa_h264.mp4" type="video/mp4" />
+        </video>
+        <div id="video-shade" class="video-shade"></div>
+        <div id="fx-layer" class="fx-layer"></div>
+        <div id="scene-layer" class="scene-layer"></div>
+        <div id="hud-layer" class="hud-layer"></div>
+        <div id="missing-video" class="missing-video" hidden>
+          <strong>No encuentro el video.</strong>
+          <span>Coloca papa_h264.mp4 en assets/video/.</span>
+        </div>
+      </div>
+    </section>
+    <section id="controls" class="controls">
+      <div class="control-row">
+        <button id="play" type="button">Reproducir</button>
+        <button id="restart" type="button">Reiniciar</button>
+        <button id="fullscreen" type="button">Pantalla completa</button>
+        <button id="record" type="button" class="primary">Grabar 2 minutos</button>
+        <span id="timecode" class="timecode">00:00.0 / 02:00.0</span>
+      </div>
+      <input id="seek" type="range" min="0" max="120" step="0.01" value="0" />
+      <div class="legend">
+        <span>Espacio: reproducir o pausar</span>
+        <span>F: pantalla completa</span>
+        <span>Esc: salir del modo grabacion</span>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
