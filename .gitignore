@@ -1,0 +1,15 @@
+# Dependencias y build
+node_modules/
+out/
+.remotion/
+*.log
+
+# Medios pesados (no caben en GitHub: video/audio de papá, renders)
+assets/video/
+masters/*.mp4
+masters/*.wav
+masters/ilustraciones_raw/
+
+# Sistema
+.DS_Store
+Thumbs.db
