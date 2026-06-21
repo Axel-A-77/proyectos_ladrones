@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "remotion studio",
     "studio": "remotion studio",
+    "v3:dev": "npx --yes http-server . -p 4173 -c-1 -o /v3-web/",
     "captions": "node scripts/build-captions.mjs",
     "typecheck": "tsc --noEmit",
     "qa:timeline": "node scripts/audit-timeline.mjs",
