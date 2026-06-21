@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5cd67"/><stop offset="1" stop-color="#efbd48"/></linearGradient>
+    <linearGradient id="suit" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#485665"/><stop offset="1" stop-color="#222831"/></linearGradient>
+    <filter id="sh" x="-25%" y="-25%" width="150%" height="150%"><feDropShadow dx="10" dy="12" stdDeviation="7" flood-opacity=".2"/></filter>
+  </defs>
+  <rect width="1800" height="900" fill="url(#bg)"/>
+  <g font-family="Arial" font-weight="900" fill="#17130f">
+    <text x="900" y="78" text-anchor="middle" font-size="68">EL PODER COMO BOTÍN</text>
+  </g>
+  <g filter="url(#sh)">
+    <rect x="55" y="145" width="500" height="650" rx="34" fill="#fff8e8" stroke="#17130f" stroke-width="11"/>
+    <rect x="650" y="145" width="500" height="650" rx="34" fill="#fff8e8" stroke="#17130f" stroke-width="11"/>
+    <rect x="1245" y="145" width="500" height="650" rx="34" fill="#fff8e8" stroke="#17130f" stroke-width="11"/>
+  </g>
+  <g font-family="Arial" font-weight="900" font-size="38" text-anchor="middle">
+    <text x="305" y="205" fill="#7454c8">ENTRA AL PODER</text>
+    <text x="900" y="205" fill="#e84a3c">SE ACOMODA</text>
+    <text x="1495" y="205" fill="#f2b84b">SE APROPIA</text>
+  </g>
+  <g transform="translate(105 250)" stroke="#17130f" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M70 430 V60 H320 V430" fill="#815031" stroke-width="13"/>
+    <path d="M55 60 L195 5 L335 60" fill="#9d6842" stroke-width="13"/>
+    <circle cx="270" cy="250" r="16" fill="#f2b84b" stroke-width="7"/>
+    <path d="M350 220 q80 15 100 85" fill="none" stroke="#e84a3c" stroke-width="12"/>
+    <path d="M430 285 l30 20 -34 12" fill="#e84a3c" stroke-width="8"/>
+    <circle cx="195" cy="465" r="52" fill="#fff" stroke-width="10"/>
+    <path d="M145 560 Q195 485 245 560" fill="#59a9d8" stroke-width="10"/>
+    <circle cx="178" cy="457" r="7" fill="#17130f" stroke="none"/><circle cx="212" cy="457" r="7" fill="#17130f" stroke="none"/>
+    <path d="M174 485 Q195 500 216 485" fill="none" stroke-width="6"/>
+  </g>
+  <g transform="translate(700 240)" stroke="#17130f" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M55 405 V245 Q200 70 345 245 V405 Z" fill="#7454c8" stroke-width="13"/>
+    <rect x="35" y="405" width="330" height="58" rx="20" fill="#4b328b" stroke-width="11"/>
+    <path d="M85 245 Q200 125 315 245" fill="#8f73df" stroke-width="9"/>
+    <circle cx="200" cy="210" r="75" fill="#fff" stroke-width="10"/>
+    <path d="M138 195 Q170 165 195 188" fill="none" stroke-width="8"/>
+    <path d="M215 185 Q247 152 274 188" fill="none" stroke-width="8"/>
+    <circle cx="176" cy="208" r="9" fill="#17130f" stroke="none"/><circle cx="239" cy="206" r="9" fill="#17130f" stroke="none"/>
+    <path d="M153 245 Q205 286 257 238" fill="none" stroke-width="8"/>
+    <path d="M138 282 Q200 260 262 282 L288 410 Q200 445 112 410 Z" fill="url(#suit)" stroke-width="11"/>
+    <path d="M185 290 L200 330 L218 290" fill="#e84a3c" stroke-width="7"/>
+    <rect x="115" y="465" width="170" height="85" rx="14" fill="#fff8e8" stroke-width="9"/>
+    <text x="200" y="520" text-anchor="middle" font-family="Arial" font-size="34" font-weight="900" fill="#17130f" stroke="none">SILLÓN</text>
+  </g>
+  <g transform="translate(1285 235)" stroke="#17130f" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M40 195 L200 90 L360 195 L330 410 L185 480 L50 405 Z" fill="#79b84a" stroke-width="13"/>
+    <rect x="165" y="215" width="70" height="110" rx="8" fill="#fff8e8" stroke-width="9"/>
+    <path d="M255 438 q80 -80 150 0" fill="none" stroke-width="14"/>
+    <rect x="250" y="420" width="190" height="150" rx="25" fill="#6e452a" stroke-width="13"/>
+    <rect x="315" y="380" width="70" height="65" rx="12" fill="none" stroke-width="11"/>
+    <g fill="#9ccd55" stroke-width="6">
+      <rect x="275" y="450" width="62" height="38" rx="5"/><rect x="345" y="450" width="62" height="38" rx="5"/>
+      <rect x="275" y="495" width="62" height="38" rx="5"/><rect x="345" y="495" width="62" height="38" rx="5"/>
+    </g>
+    <g font-family="Arial" font-size="24" font-weight="900" fill="#17130f" stroke="none" text-anchor="middle">
+      <text x="306" y="477">$</text><text x="376" y="477">$</text><text x="306" y="522">$</text><text x="376" y="522">$</text>
+    </g>
+    <path d="M115 592 Q200 550 285 592" fill="#e84a3c" stroke-width="10"/>
+    <text x="200" y="630" text-anchor="middle" font-family="Arial" font-size="34" font-weight="900" fill="#17130f" stroke="none">MI BILLETERA</text>
+  </g>
+  <g stroke="#e84a3c" stroke-width="15" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M575 470 H635"/><path d="M620 450 L645 470 L620 490"/>
+    <path d="M1170 470 H1230"/><path d="M1215 450 L1240 470 L1215 490"/>
+  </g>
+</svg>
