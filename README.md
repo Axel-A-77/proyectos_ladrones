@@ -24,45 +24,44 @@ Así el audio nunca se corta ni se desincroniza (el elemento de video/audio nunc
 
 ```
 src/
-  Root.tsx              registro de composiciones
-  LosLadronesDemo.tsx   ensamblado (capa base + cortes + subtítulos)
-  theme.ts              paleta, rutas, fps/medidas
-  fonts.ts              tipografías (Nunito, Patrick Hand, Luckiest Guy)
-  segments.ts           línea de tiempo: array de tramos PAPA / ANIM
-  components/
-    PapaBase.tsx        audio + video continuos
-    Overlay.tsx         fondo por tono + fundidos de cada corte
-    Subtitles.tsx       subtítulos desde el .srt
-  effects/
-    Appear.tsx          "aparecer" (rebote suave, escalonado)
-    DrawPath.tsx        "se dibuja" (trazo SVG)
-  scenes/
-    registry.ts         id de escena -> componente
-    TitleScene.tsx      00_titulo
-    Scene01Puerta.tsx   01_puerta_sillon_billetera
-  data/captions.json    generado desde subtitulos.srt
+  Root.tsx              composiciones: LosLadrones (16:33), LosLadronesDemo, QAPeople
+  LosLadrones.tsx       video completo (Movie con SEGMENTS)
+  Movie.tsx             ensamblado: PapaBase + escenas Overlay + Subtitles (última capa)
+  theme.ts              paleta (sun/cream/ink…), rutas, fps/medidas
+  fonts.ts              Permanent Marker (display) · Kalam (mano) · Nunito (subtítulos)
+  segments.ts           línea de tiempo: tramos PAPA / ANIM / TITLE
+  components/           PapaBase · Overlay (tono) · Subtitles
+  effects/              flow.tsx (FlowItem/FreeText/BubbleBox) · kit.tsx · DrawPath
+  visual/               People.tsx (PersonBase + Diogenes) · ChapterBadge.tsx
+  scenes/               all.tsx (registro) · Act1/Act1b/Act2/Act3 · *Scene.tsx · doodles.tsx
+  data/                 captions.json (desde subtitulos_corregidos.srt) · words.json (Whisper)
 ```
+
+Sistema visual y reglas: ver **`docs/VISUAL_SYSTEM.md`**. Auditoría: `docs/EDICION_AUDIT.md`.
 
 ## Flujo de trabajo
 
 ```bash
-npm run captions     # regenera subtítulos si cambia el .srt
-npm run studio       # preview interactivo (http://localhost:3000)
-npm run render       # renderiza el DEMO -> out/demo.mp4
-npm run render:full  # (cuando exista) video completo -> out/ladrones.mp4
+npm run captions     # regenera captions.json desde subtitulos_corregidos.srt (fuente maestra)
+npm run typecheck    # tsc --noEmit
+npm run qa           # typecheck + qa:timeline + qa:captions + qa:assets
+npm run qa:stills    # fotogramas de control -> out/qa/
+node scripts/contact-sheets.mjs   # docs/qa/contact-sheet.png + timeline-every-10s.png
+npm run studio       # preview interactivo
+npm run render       # video completo -> out/ladrones_FINAL.mp4
 ```
 
-### Reduced motion
+Requiere `assets/video/papa_h264.mp4` (proxy del video de papá) para el render con el medio real.
 
-Se respeta `prefers-reduced-motion`: en preview detecta el ajuste del sistema;
-en render se puede forzar con `--props '{"reducedMotion":true}'` (desactiva rebotes y trazos).
+### Subtítulos
+`subtitulos_corregidos.srt` es la **fuente maestra** (corregida con el guion). `subtitulos_original.srt`
+es la transcripción cruda. `npm run captions` SIEMPRE lee el corregido (no reintroduce typos).
+
+### Reduced motion
+Se respeta `prefers-reduced-motion`; en render se fuerza con `--props '{"reducedMotion":true}'`.
 
 ## Notas de assets
-
-- El video se transcodifica a H.264 (`assets/video/papa_h264.mp4`) para que se previsualice
-  en el navegador (el HEVC original solo se decodifica en el render). El master HEVC se
-  guarda fuera de `assets/` para no copiarlo en cada bundle.
-- Viñetas, carteles y etiquetas (PODER, EL PAÍS, HOSPITAL…) van como **texto en el código**,
-  nunca dentro de las imágenes.
-- `assets/ilustraciones/31_diogenes_lampara .png` tiene un espacio en el nombre: renombrar
-  antes de usarlo (`31_diogenes_lampara.png`).
+- Video proxy H.264 en `assets/video/`; master HEVC fuera de `assets/` (no se sube a Git).
+- Personajes humanos: **SVG (`PersonBase`)**, un solo estilo. PNGs del banco solo para props
+  detallados aún en uso (ver `docs/ASSETS_QA.md`); el recorte vive en `trimmed/` (gitignored).
+- Textos/carteles van como **texto en código**, nunca dentro de las imágenes.
